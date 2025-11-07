@@ -1,8 +1,8 @@
 # TiaCAD YAML Reference Guide
 
-**Version:** 0.2.0
-**Last Updated:** 2025-10-25
-**Status:** Phase 2 Complete
+**Version:** 3.0.0
+**Last Updated:** 2025-11-07
+**Status:** v3.0 - Unified Spatial References
 
 ---
 
@@ -11,14 +11,19 @@
 1. [Document Structure](#document-structure)
 2. [Metadata](#metadata)
 3. [Parameters](#parameters)
-4. [Parts](#parts)
-5. [Operations](#operations)
+4. [References (v3.0)](#references-v30)
+   - [Auto-Generated References](#auto-generated-references)
+   - [Named References](#named-references)
+   - [Reference Types](#reference-types)
+   - [Using References](#using-references)
+5. [Parts](#parts)
+6. [Operations](#operations)
    - [Transform Operations](#transform-operations)
    - [Boolean Operations](#boolean-operations)
    - [Pattern Operations](#pattern-operations)
    - [Finishing Operations](#finishing-operations)
-6. [Export](#export)
-7. [Complete Examples](#complete-examples)
+7. [Export](#export)
+8. [Complete Examples](#complete-examples)
 
 ---
 
@@ -36,10 +41,19 @@ parameters:         # Optional: parametric values
   width: 100
   height: 50
 
+references:         # Optional (v3.0): named spatial references
+  mount_point:      # Note: Many references are auto-generated!
+    type: face
+    part: base
+    selector: ">Z"
+
 parts:             # Required: define primitive parts
   part_name:
     primitive: box
-    size: [...]
+    parameters:
+      width: 100
+      height: 50
+      depth: 10
 
 operations:        # Optional: transform, boolean, pattern, finish
   operation_name:
@@ -118,6 +132,225 @@ parts:
 
 ---
 
+## References (v3.0)
+
+**New in v3.0:** TiaCAD introduces a unified spatial reference system that replaces the old `named_points:` section. This system supports not just points, but also faces, edges, and axes with full orientation information.
+
+### Auto-Generated References
+
+Every part automatically provides these references **without explicit definition**:
+
+#### Universal Auto-References (All Primitives)
+
+Available for all parts (box, cylinder, sphere, cone):
+
+| Reference | Description | Type | Example |
+|-----------|-------------|------|---------|
+| `{part}.center` | Bounding box center | point | `base.center` |
+| `{part}.origin` | Part origin | point | `pillar.origin` |
+| `{part}.face_top` | Top face (>Z) | face | `platform.face_top` |
+| `{part}.face_bottom` | Bottom face (<Z) | face | `platform.face_bottom` |
+| `{part}.face_left` | Left face (<X) | face | `wall.face_left` |
+| `{part}.face_right` | Right face (>X) | face | `wall.face_right` |
+| `{part}.face_front` | Front face (>Y) | face | `panel.face_front` |
+| `{part}.face_back` | Back face (<Y) | face | `panel.face_back` |
+| `{part}.axis_x` | X-axis through center | axis | `shaft.axis_x` |
+| `{part}.axis_y` | Y-axis through center | axis | `shaft.axis_y` |
+| `{part}.axis_z` | Z-axis through center | axis | `shaft.axis_z` |
+
+**Benefits:**
+- No need to define common references manually
+- Consistent naming across all parts
+- Works with transforms and offsets
+- Full orientation support (normals, tangents)
+
+**Example Usage:**
+
+```yaml
+parts:
+  platform:
+    primitive: box
+    parameters:
+      width: 100
+      height: 10
+      depth: 100
+
+  pillar:
+    primitive: cylinder
+    parameters:
+      radius: 5
+      height: 50
+    translate:
+      to: platform.face_top  # Auto-reference - no definition needed!
+
+  cap:
+    primitive: box
+    parameters:
+      width: 15
+      height: 5
+      depth: 15
+    translate:
+      to:
+        from: pillar.face_top  # Auto-reference with offset
+        offset: [0, 0, 2]      # 2 units above pillar
+```
+
+### Named References
+
+You can still define custom references when auto-generated ones don't suffice:
+
+```yaml
+references:
+  mount_surface:
+    type: face
+    part: base
+    selector: ">Z and <X"
+    at: center
+
+  hinge_axis:
+    type: axis
+    from: [0, 0, 0]
+    to: [0, 0, 100]
+
+  corner_point:
+    type: point
+    value: [50, 50, 0]
+```
+
+### Reference Types
+
+v3.0 supports four reference types:
+
+#### 1. Point References
+
+Simple 3D coordinates:
+
+```yaml
+references:
+  corner:
+    type: point
+    value: [100, 50, 0]
+
+  # Or inline
+parts:
+  bracket:
+    translate:
+      to: [100, 50, 0]  # Direct coordinate array
+```
+
+#### 2. Face References
+
+Face with position + normal vector:
+
+```yaml
+references:
+  mount_face:
+    type: face
+    part: base_plate
+    selector: ">Z"     # Face selector (CadQuery syntax)
+    at: center         # Optional: center (default), min, max
+
+  # Using auto-generated face
+parts:
+  bracket:
+    translate:
+      to: base_plate.face_top  # Auto-generated face reference
+```
+
+**Face selectors:**
+- `">Z"` - faces pointing in +Z direction
+- `"<X"` - faces pointing in -X direction
+- `">Z and <X"` - faces matching both conditions
+- See CadQuery documentation for full selector syntax
+
+#### 3. Edge References
+
+Edge with position + tangent vector:
+
+```yaml
+references:
+  rail_edge:
+    type: edge
+    part: frame
+    selector: ">X and >Z"  # Edge parallel to X, on +Z face
+    at: midpoint           # Optional: midpoint (default), start, end
+```
+
+#### 4. Axis References
+
+Axis defined by direction vector:
+
+```yaml
+references:
+  rotation_axis:
+    type: axis
+    from: [0, 0, 0]
+    to: [0, 1, 0]       # Y-axis
+
+  # Or use auto-generated axis
+operations:
+  rotated:
+    type: transform
+    input: gear
+    transforms:
+      - rotate:
+          angle: 90
+          around: shaft.axis_z  # Auto-generated axis
+```
+
+### Using References
+
+References can be used anywhere a spatial location is needed:
+
+#### In Translate Operations
+
+```yaml
+parts:
+  mounted_part:
+    translate:
+      to: base.face_top  # Position at reference
+
+  offset_part:
+    translate:
+      to:
+        from: base.face_top
+        offset: [0, 0, 5]  # Offset in face's local frame
+```
+
+#### In Rotate Operations
+
+```yaml
+operations:
+  rotated:
+    type: transform
+    input: part
+    transforms:
+      - rotate:
+          angle: 45
+          around: base.face_top  # Rotate around face normal
+```
+
+#### Local Frame Offsets
+
+Offsets follow the reference's local coordinate system:
+
+```yaml
+parts:
+  bracket:
+    translate:
+      to:
+        from: wall.face_front  # Face on +Y side
+        offset: [5, 0, 10]     # X=5 right, Y=0 (perpendicular), Z=10 up
+```
+
+**Local frame orientation:**
+- Face: Normal as Z-axis, tangent as X/Y
+- Edge: Tangent as X-axis, normal as Z
+- Axis: Direction as Z-axis
+- Point: World coordinate system
+
+---
+
 ## Parts
 
 Parts are the basic building blocks. Each part starts from a primitive shape.
@@ -128,7 +361,10 @@ Parts are the basic building blocks. Each part starts from a primitive shape.
 parts:
   my_box:
     primitive: box
-    size: [width, height, depth]  # X, Y, Z dimensions
+    parameters:
+      width: 100                  # X dimension
+      height: 50                  # Y dimension
+      depth: 20                   # Z dimension
     origin: center                # center, corner, or [x,y,z]
 ```
 
@@ -143,8 +379,9 @@ parts:
 parts:
   my_cylinder:
     primitive: cylinder
-    radius: 10                    # Cylinder radius
-    height: 50                    # Cylinder height
+    parameters:
+      radius: 10                  # Cylinder radius
+      height: 50                  # Cylinder height
     origin: center                # center, corner, or [x,y,z]
 ```
 
@@ -154,7 +391,8 @@ parts:
 parts:
   my_sphere:
     primitive: sphere
-    radius: 15                    # Sphere radius
+    parameters:
+      radius: 15                  # Sphere radius
     origin: center                # Usually center
 ```
 
@@ -164,8 +402,9 @@ parts:
 parts:
   my_cone:
     primitive: cone
-    radius: 20                    # Base radius
-    height: 40                    # Cone height
+    parameters:
+      radius: 20                  # Base radius
+      height: 40                  # Cone height
     origin: center                # center, corner, or [x,y,z]
 ```
 
@@ -177,13 +416,41 @@ Apply transforms directly to parts:
 parts:
   rotated_box:
     primitive: box
-    size: [10, 20, 30]
+    parameters:
+      width: 10
+      height: 20
+      depth: 30
     transforms:
       - translate: [50, 0, 0]
       - rotate:
           axis: Z
           angle: 45
           origin: [0, 0, 0]
+```
+
+**v3.0 Transform Enhancements:**
+
+You can also use auto-references and spatial references in transforms:
+
+```yaml
+parts:
+  mounted_bracket:
+    primitive: box
+    parameters: {width: 20, height: 5, depth: 30}
+    translate:
+      to: base.face_top  # Auto-reference
+
+  aligned_gear:
+    primitive: cylinder
+    parameters: {radius: 15, height: 10}
+    transforms:
+      - translate:
+          to:
+            from: shaft.face_top
+            offset: [0, 0, 2]  # Local frame offset
+      - rotate:
+          angle: 45
+          around: shaft.axis_z  # Rotate around axis reference
 ```
 
 ---
@@ -1008,6 +1275,19 @@ Valid axes: X, Y, Z, or vector [x,y,z]
 
 ---
 
-**Version:** 0.2.0
-**Last Updated:** 2025-10-25
-**Status:** Phase 2 Complete - Production Ready
+## Migration from v0.3.0
+
+If you have existing v0.3.0 YAML files, see [MIGRATION_GUIDE_V3.md](docs/MIGRATION_GUIDE_V3.md) for detailed migration instructions.
+
+**Key Changes:**
+- `named_points:` → `references:` with explicit `type` field
+- Auto-generated references (e.g., `part.face_top`)
+- `size:` → `parameters:` for primitive dimensions
+- Local frame offsets for intuitive positioning
+- Face/edge/axis references (not just points)
+
+---
+
+**Version:** 3.0.0
+**Last Updated:** 2025-11-07
+**Status:** v3.0 Release - Unified Spatial References
