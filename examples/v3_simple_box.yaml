@@ -1,0 +1,43 @@
+metadata:
+  name: Simple Box Example (v3.0)
+  description: Demonstrates v3.0 auto-references and unified spatial reference system
+  version: 3.0
+  author: TiaCAD Team
+  created: 2025-11-07
+
+parameters:
+  base_size: 100
+  base_height: 10
+  top_size: 50
+  top_height: 20
+
+parts:
+  # Base platform
+  base:
+    primitive: box
+    parameters:
+      width: '${base_size}'
+      height: '${base_height}'
+      depth: '${base_size}'
+    origin: center
+
+  # Top box positioned using auto-reference (no manual reference definition!)
+  top:
+    primitive: box
+    parameters:
+      width: '${top_size}'
+      height: '${top_height}'
+      depth: '${top_size}'
+    origin: center
+    translate:
+      to: base.face_top  # ✨ Auto-reference! No explicit definition needed
+
+# No references section needed - auto-references handle everything!
+
+export:
+  default_part: top
+  parts:
+    - name: base
+      description: Base platform
+    - name: top
+      description: Top box positioned using auto-reference

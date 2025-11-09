@@ -1,0 +1,169 @@
+metadata:
+  name: Bracket Mount Assembly (v3.0)
+  description: |
+    Practical assembly demonstrating v3.0 features:
+    - Auto-references for intuitive positioning
+    - Local frame offsets for precise placement
+    - Boolean operations for mounting holes
+    - Parametric design for easy customization
+  version: 3.0
+  author: TiaCAD Team
+  created: 2025-11-07
+
+parameters:
+  # Base plate dimensions
+  base_width: 150
+  base_depth: 100
+  base_thickness: 8
+
+  # Bracket dimensions
+  bracket_width: 150
+  bracket_height: 80
+  bracket_thickness: 6
+
+  # Support arm dimensions
+  arm_width: 12
+  arm_depth: 60
+  arm_height: 80
+
+  # Mounting holes
+  hole_diameter: 6.5  # For M6 screws
+  hole_spacing: 100   # Horizontal spacing
+  hole_offset_top: 15 # Distance from top edge
+
+  # Assembly parameters
+  arm_offset_from_edge: 30  # Position of support arms
+
+parts:
+  # 1. Base mounting plate (attaches to wall)
+  base_plate:
+    primitive: box
+    parameters:
+      width: '${base_width}'
+      height: '${base_thickness}'
+      depth: '${base_depth}'
+    origin: center
+
+  # 2. Vertical bracket (mounted on back of base)
+  bracket:
+    primitive: box
+    parameters:
+      width: '${bracket_width}'
+      height: '${bracket_thickness}'
+      depth: '${bracket_height}'
+    origin: center
+    translate:
+      to: base_plate.face_back  # ✨ Auto-reference positioning
+
+  # 3. Left support arm
+  left_arm:
+    primitive: box
+    parameters:
+      width: '${arm_width}'
+      height: '${arm_depth}'
+      depth: '${arm_height}'
+    origin: center
+    translate:
+      to:
+        from: bracket.face_front  # ✨ Auto-reference with offset
+        offset: ['${-arm_offset_from_edge}', 0, 0]  # Local frame offset!
+
+  # 4. Right support arm
+  right_arm:
+    primitive: box
+    parameters:
+      width: '${arm_width}'
+      height: '${arm_depth}'
+      depth: '${arm_height}'
+    origin: center
+    translate:
+      to:
+        from: bracket.face_front  # ✨ Auto-reference with offset
+        offset: ['${arm_offset_from_edge}', 0, 0]  # Local frame offset!
+
+  # 5. Left mounting hole template
+  left_hole:
+    primitive: cylinder
+    parameters:
+      radius: '${hole_diameter / 2}'
+      height: '${base_thickness + 2}'  # Slightly longer than plate
+    origin: center
+    translate:
+      to:
+        from: base_plate.face_top  # Position on top face
+        offset:
+          - '${-hole_spacing / 2}'     # Left of center
+          - '${-base_depth/2 + hole_offset_top}'  # From front edge
+          - 0                          # On the face surface
+
+  # 6. Right mounting hole template
+  right_hole:
+    primitive: cylinder
+    parameters:
+      radius: '${hole_diameter / 2}'
+      height: '${base_thickness + 2}'
+    origin: center
+    translate:
+      to:
+        from: base_plate.face_top
+        offset:
+          - '${hole_spacing / 2}'      # Right of center
+          - '${-base_depth/2 + hole_offset_top}'
+          - 0
+
+operations:
+  # Subtract mounting holes from base plate
+  base_with_holes:
+    type: boolean
+    operation: difference
+    base: base_plate
+    subtract:
+      - left_hole
+      - right_hole
+
+  # Combine all parts into final assembly
+  final_assembly:
+    type: boolean
+    operation: union
+    inputs:
+      - base_with_holes
+      - bracket
+      - left_arm
+      - right_arm
+
+  # Apply finishing to smooth edges
+  finished_assembly:
+    type: finishing
+    finish: fillet
+    input: final_assembly
+    radius: 2.0
+    edges: all
+
+export:
+  default_part: finished_assembly
+  parts:
+    - name: finished_assembly
+      description: Complete bracket mount assembly with mounting holes and filleted edges
+      filename: bracket_mount_assembly.stl
+
+# v3.0 Features Demonstrated:
+# ========================
+# 1. Auto-references (no explicit reference definitions!)
+#    - base_plate.face_back
+#    - base_plate.face_top
+#    - bracket.face_front
+#
+# 2. Local frame offsets
+#    - Offsets relative to face orientation
+#    - Intuitive coordinate system
+#
+# 3. Parametric design
+#    - Easy to customize dimensions
+#    - Expressions for derived values
+#
+# 4. Boolean operations
+#    - Subtract holes from base
+#    - Union for final assembly
+#
+# 5. Finishing operations
+#    - Fillet for professional edges

@@ -16,20 +16,21 @@ tags:
 
 # TiaCAD - Declarative Parametric CAD in YAML
 
-**Version:** 3.0.0-dev (Clean Architecture Rewrite - Phase 3 Complete ✅)
-**Status:** Active development - v3.0 unified spatial reference system
-**Current:** Phase 3 Complete - Auto-references fully implemented (848 tests passing)
+**Version:** 3.0.0 (Clean Architecture - Phase 4 Complete ✅)
+**Status:** Ready for v3.0 Release
+**Current:** Phase 4 Complete - Documentation, examples, and polish finished
 **Target Release:** v3.0.0 on Nov 19, 2025
 **Breaking Changes:** Yes - v3.0 breaks compatibility for cleaner design (see migration guide)
 
-> **🎯 v3.0 Status:** Core implementation complete! We've successfully implemented:
+> **🎉 v3.0 Status: READY FOR RELEASE!** All phases complete:
 > - ✅ Unified `SpatialRef` dataclass (position + orientation)
 > - ✅ `SpatialResolver` with comprehensive reference resolution
 > - ✅ Auto-generated part-local references (e.g., `base.face_top`)
 > - ✅ Local frame offsets for intelligent positioning
-> - 🚧 Documentation and examples (in progress)
+> - ✅ Comprehensive documentation and examples
+> - ✅ Migration guide and release notes
 >
-> See `docs/V3_IMPLEMENTATION_STATUS.md` for details and `docs/MIGRATION_GUIDE_V3.md` for upgrade instructions.
+> See `RELEASE_NOTES_V3.md` for complete details and `docs/MIGRATION_GUIDE_V3.md` for upgrade instructions.
 
 ---
 
