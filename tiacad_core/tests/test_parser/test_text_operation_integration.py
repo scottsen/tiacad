@@ -23,10 +23,10 @@ parameters:
 parts:
   base_box:
     primitive: box
-    size:
-      - ${box_size}
-      - ${box_size}
-      - 10
+    parameters:
+      width: ${box_size}
+      height: ${box_size}
+      depth: 10
     color: silver
 
 operations:
@@ -46,7 +46,13 @@ schema_version: 2.0
 parts:
   plate:
     primitive: box
-    size: [40, 20, 3]
+    parameters:
+
+      width: 40
+
+      height: 20
+
+      depth: 3
 
 operations:
   label:
@@ -65,7 +71,13 @@ schema_version: 2.0
 parts:
   cube:
     primitive: box
-    size: [20, 20, 20]
+    parameters:
+
+      width: 20
+
+      height: 20
+
+      depth: 20
 
 operations:
   top_label:
@@ -102,7 +114,13 @@ schema_version: 2.0
 parts:
   panel:
     primitive: box
-    size: [50, 30, 5]
+    parameters:
+
+      width: 50
+
+      height: 30
+
+      depth: 5
 
 operations:
   title:
@@ -134,7 +152,13 @@ schema_version: 2.0
 parts:
   main_body:
     primitive: box
-    size: [30, 30, 10]
+    parameters:
+
+      width: 30
+
+      height: 30
+
+      depth: 10
 
   hole:
     primitive: cylinder
@@ -169,10 +193,10 @@ parameters:
 parts:
   name_plate:
     primitive: box
-    size:
-      - ${plate_width}
-      - 20
-      - 3
+    parameters:
+      width: ${plate_width}
+      height: 20
+      depth: 3
 
 operations:
   product_label:
@@ -387,7 +411,13 @@ schema_version: 2.0
 parts:
   box:
     primitive: box
-    size: [20, 20, 10]
+    parameters:
+
+      width: 20
+
+      height: 20
+
+      depth: 10
 
 operations:
   bad_text:
@@ -416,7 +446,13 @@ schema_version: 2.0
 parts:
   box:
     primitive: box
-    size: [20, 20, 10]
+    parameters:
+
+      width: 20
+
+      height: 20
+
+      depth: 10
 
 operations:
   bad_text:
@@ -450,7 +486,13 @@ parameters:
 parts:
   back_plate:
     primitive: box
-    size: [80, 50, 3]
+    parameters:
+
+      width: 80
+
+      height: 50
+
+      depth: 3
     color: black
 
 operations:
@@ -498,12 +540,24 @@ schema_version: 2.0
 parts:
   sign_base:
     primitive: box
-    size: [100, 100, 5]
+    parameters:
+
+      width: 100
+
+      height: 100
+
+      depth: 5
     color: yellow
 
   border:
     primitive: box
-    size: [95, 95, 6]
+    parameters:
+
+      width: 95
+
+      height: 95
+
+      depth: 6
 
 operations:
   sign_with_border:

@@ -235,7 +235,7 @@ class TiaCADParser:
 
         # Load YAML with line tracking
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path, 'r', encoding='utf-8') as f:
                 yaml_string = f.read()
             yaml_data, line_tracker = parse_yaml_with_lines(yaml_string, filename=file_path)
         except FileNotFoundError:

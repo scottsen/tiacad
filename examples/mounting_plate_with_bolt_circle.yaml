@@ -23,7 +23,13 @@ parts:
   # Main mounting plate
   plate:
     primitive: box
-    size: ['${plate_width}', '${plate_height}', '${plate_thickness}']
+    parameters:
+
+      width: '${plate_width}'
+
+      height: '${plate_height}'
+
+      depth: '${plate_thickness}'
     origin: center
 
   # Bolt hole template (will be patterned)

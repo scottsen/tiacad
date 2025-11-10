@@ -23,8 +23,8 @@ class TestTranslateOperations:
         # Build initial parts
         params = {}
         parts_spec = {
-            'box1': {'primitive': 'box', 'size': [10, 10, 10]},
-            'box2': {'primitive': 'box', 'size': [5, 5, 5]}
+            'box1': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}},
+            'box2': {'primitive': 'box', 'parameters': {'width': 5, 'height': 5, 'depth': 5}}
         }
 
         resolver = ParameterResolver(params)
@@ -62,7 +62,7 @@ class TestTranslateOperations:
         """Test translate to absolute position"""
         params = {}
         parts_spec = {
-            'box': {'primitive': 'box', 'size': [10, 10, 10]}
+            'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -93,7 +93,7 @@ class TestTranslateOperations:
             'offset_x': 10
         }
         parts_spec = {
-            'box': {'primitive': 'box', 'size': [10, 10, 10]}
+            'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -131,7 +131,7 @@ class TestRotateOperations:
         """Test rotate around origin"""
         params = {}
         parts_spec = {
-            'box': {'primitive': 'box', 'size': [10, 10, 10]}
+            'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -164,7 +164,7 @@ class TestRotateOperations:
         """Test rotation around X, Y, Z axes"""
         params = {}
         parts_spec = {
-            'box': {'primitive': 'box', 'size': [10, 10, 10]}
+            'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -203,7 +203,7 @@ class TestRotateOperations:
             'origin_y': 50,
         }
         parts_spec = {
-            'box': {'primitive': 'box', 'size': [10, 10, 10]}
+            'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -240,7 +240,7 @@ class TestSequentialTransforms:
         """Test translating then rotating"""
         params = {}
         parts_spec = {
-            'box': {'primitive': 'box', 'size': [10, 10, 10]}
+            'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -274,7 +274,7 @@ class TestSequentialTransforms:
         """Test multiple translations"""
         params = {}
         parts_spec = {
-            'box': {'primitive': 'box', 'size': [10, 10, 10]}
+            'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -308,7 +308,7 @@ class TestMultipleOperations:
         """Test multiple operations creating multiple parts"""
         params = {}
         parts_spec = {
-            'base': {'primitive': 'box', 'size': [10, 10, 10]}
+            'base': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}
         }
 
         resolver = ParameterResolver(params)
@@ -349,7 +349,7 @@ class TestErrorHandling:
     def test_missing_type_field(self):
         """Test operation without type field"""
         params = {}
-        parts_spec = {'box': {'primitive': 'box', 'size': [10, 10, 10]}}
+        parts_spec = {'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}}
 
         resolver = ParameterResolver(params)
         parts_builder = PartsBuilder(resolver)
@@ -371,7 +371,7 @@ class TestErrorHandling:
     def test_unknown_input_part(self):
         """Test transform with non-existent input part"""
         params = {}
-        parts_spec = {'box': {'primitive': 'box', 'size': [10, 10, 10]}}
+        parts_spec = {'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}}
 
         resolver = ParameterResolver(params)
         parts_builder = PartsBuilder(resolver)
@@ -394,7 +394,7 @@ class TestErrorHandling:
     def test_missing_transforms_field(self):
         """Test transform without transforms field"""
         params = {}
-        parts_spec = {'box': {'primitive': 'box', 'size': [10, 10, 10]}}
+        parts_spec = {'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}}
 
         resolver = ParameterResolver(params)
         parts_builder = PartsBuilder(resolver)
@@ -417,7 +417,7 @@ class TestErrorHandling:
     def test_rotate_missing_angle(self):
         """Test rotate without angle"""
         params = {}
-        parts_spec = {'box': {'primitive': 'box', 'size': [10, 10, 10]}}
+        parts_spec = {'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}}
 
         resolver = ParameterResolver(params)
         parts_builder = PartsBuilder(resolver)
@@ -448,7 +448,7 @@ class TestErrorHandling:
     def test_rotate_missing_origin(self):
         """Test rotate without origin (required in TiaCAD!)"""
         params = {}
-        parts_spec = {'box': {'primitive': 'box', 'size': [10, 10, 10]}}
+        parts_spec = {'box': {'primitive': 'box', 'parameters': {'width': 10, 'height': 10, 'depth': 10}}}
 
         resolver = ParameterResolver(params)
         parts_builder = PartsBuilder(resolver)
@@ -489,8 +489,8 @@ class TestGuitarHangerPattern:
         }
 
         parts_spec = {
-            'beam': {'primitive': 'box', 'size': [32, 75, 24]},
-            'arm': {'primitive': 'box', 'size': [22, '${arm_len}', 16]}
+            'beam': {'primitive': 'box', 'parameters': {'width': 32, 'height': 75, 'depth': 24}},
+            'arm': {'primitive': 'box', 'parameters': {'width': 22, 'height': '${arm_len}', 'depth': 16}}
         }
 
         resolver = ParameterResolver(params)

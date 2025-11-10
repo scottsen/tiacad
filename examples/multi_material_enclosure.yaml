@@ -76,7 +76,13 @@ parts:
   # Main enclosure body (Black PLA)
   enclosure_outer:
     primitive: box
-    size: ['${enclosure_width}', '${enclosure_depth}', '${enclosure_height}']
+    parameters:
+
+      width: '${enclosure_width}'
+
+      height: '${enclosure_depth}'
+
+      depth: '${enclosure_height}'
     origin: corner
     material: structure-material
 
@@ -91,14 +97,26 @@ parts:
   # Transparent window (Clear PETG)
   front_window:
     primitive: box
-    size: ['${window_width}', '${window_thickness}', '${window_height}']
+    parameters:
+
+      width: '${window_width}'
+
+      height: '${window_thickness}'
+
+      depth: '${window_height}'
     origin: center
     material: window-material
 
   # Flexible gasket (Red TPU)
   lid_gasket:
     primitive: box
-    size: ['${gasket_width}', '${gasket_depth}', '${gasket_thickness}']
+    parameters:
+
+      width: '${gasket_width}'
+
+      height: '${gasket_depth}'
+
+      depth: '${gasket_thickness}'
     origin: center
     material: gasket-material
 

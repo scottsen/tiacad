@@ -8,7 +8,13 @@ parameters:
 parts:
   plate:
     primitive: box
-    size: [10, 20, 30]
+    parameters:
+
+      width: 10
+
+      height: 20
+
+      depth: 30
 
   hole:
     primitive: cylinder

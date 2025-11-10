@@ -27,17 +27,35 @@ parts:
   # Wall plate
   plate:
     primitive: box
-    size: ['${plate_w}', '${plate_t}', '${plate_h}']
+    parameters:
+
+      width: '${plate_w}'
+
+      height: '${plate_t}'
+
+      depth: '${plate_h}'
 
   # Support beam
   beam:
     primitive: box
-    size: ['${beam_w}', '${beam_len}', '${beam_h}']
+    parameters:
+
+      width: '${beam_w}'
+
+      height: '${beam_len}'
+
+      depth: '${beam_h}'
 
   # Cradle arm (template)
   arm:
     primitive: box
-    size: ['${arm_w}', '${arm_len}', '${arm_h}']
+    parameters:
+
+      width: '${arm_w}'
+
+      height: '${arm_len}'
+
+      depth: '${arm_h}'
 
 operations:
   # Position and tilt left arm

@@ -16,7 +16,13 @@ schema_version: "2.0"
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: red
 """
         doc = TiaCADParser.parse_string(yaml_content)
@@ -37,7 +43,13 @@ schema_version: "2.0"
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: "#0066CC"
 """
         doc = TiaCADParser.parse_string(yaml_content)
@@ -60,12 +72,24 @@ colors:
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: brand-blue
 
   box2:
     primitive: box
-    size: [5, 5, 5]
+    parameters:
+
+      width: 5
+
+      height: 5
+
+      depth: 5
     color: brand-red
 """
         doc = TiaCADParser.parse_string(yaml_content)
@@ -87,12 +111,24 @@ schema_version: "2.0"
 parts:
   plate:
     primitive: box
-    size: [100, 100, 5]
+    parameters:
+
+      width: 100
+
+      height: 100
+
+      depth: 5
     material: aluminum
 
   bracket:
     primitive: box
-    size: [20, 20, 10]
+    parameters:
+
+      width: 20
+
+      height: 20
+
+      depth: 10
     material: steel
 """
         doc = TiaCADParser.parse_string(yaml_content)
@@ -114,7 +150,13 @@ schema_version: "2.0"
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: [0.5, 0.6, 0.7]
 """
         doc = TiaCADParser.parse_string(yaml_content)
@@ -134,7 +176,13 @@ schema_version: "2.0"
 parts:
   window:
     primitive: box
-    size: [10, 10, 2]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 2
     color: [0.0, 0.0, 1.0, 0.3]
 """
         doc = TiaCADParser.parse_string(yaml_content)
@@ -152,7 +200,13 @@ schema_version: "2.0"
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color:
       h: 240
       s: 100
@@ -175,7 +229,13 @@ schema_version: "2.0"
 parts:
   custom_part:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     appearance:
       color: [0.8, 0.2, 0.2]
       finish: glossy
@@ -209,7 +269,13 @@ colors:
 parts:
   part1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: red
 
   part2:
@@ -225,7 +291,13 @@ parts:
 
   part4:
     primitive: box
-    size: [5, 5, 5]
+    parameters:
+
+      width: 5
+
+      height: 5
+
+      depth: 5
     material: aluminum
 
   part5:
@@ -257,7 +329,13 @@ schema_version: "2.0"
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         doc = TiaCADParser.parse_string(yaml_content)
         part = doc.get_part('box1')
@@ -274,7 +352,13 @@ schema_version: "2.0"
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: invalid-color-name-xyz
 """
         # Should not raise exception (non-fatal error)
@@ -297,12 +381,24 @@ colors:
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: ${primary_color}
 
   box2:
     primitive: box
-    size: [5, 5, 5]
+    parameters:
+
+      width: 5
+
+      height: 5
+
+      depth: 5
     color: theme
 """
         doc = TiaCADParser.parse_string(yaml_content)
@@ -328,12 +424,24 @@ schema_version: "2.0"
 parts:
   cover:
     primitive: box
-    size: [100, 80, 2]
+    parameters:
+
+      width: 100
+
+      height: 80
+
+      depth: 2
     color: red
 
   frame:
     primitive: box
-    size: [100, 80, 10]
+    parameters:
+
+      width: 100
+
+      height: 80
+
+      depth: 10
     color: "#0066CC"
 
   detail:
@@ -357,7 +465,13 @@ schema_version: "2.0"
 parts:
   bracket:
     primitive: box
-    size: [50, 30, 5]
+    parameters:
+
+      width: 50
+
+      height: 30
+
+      depth: 5
     material: aluminum
 
   shaft:
@@ -393,17 +507,35 @@ colors:
 parts:
   main_cover:
     primitive: box
-    size: [120, 100, 3]
+    parameters:
+
+      width: 120
+
+      height: 100
+
+      depth: 3
     color: brand-blue
 
   accent_strip:
     primitive: box
-    size: [120, 10, 3]
+    parameters:
+
+      width: 120
+
+      height: 10
+
+      depth: 3
     color: brand-orange
 
   mounting_bracket:
     primitive: box
-    size: [30, 30, 5]
+    parameters:
+
+      width: 30
+
+      height: 30
+
+      depth: 5
     color: frame-color
 """
         doc = TiaCADParser.parse_string(yaml_content)

@@ -247,7 +247,13 @@ parameters:
 parts:
   box:
     primitive: box
-    size: ['${width}', '${depth}', '${height}']
+    parameters:
+
+      width: '${width}'
+
+      height: '${depth}'
+
+      depth: '${height}'
 """
 
 
@@ -266,7 +272,13 @@ parameters:
 parts:
   outer_box:
     primitive: box
-    size: ['${outer_width}', '${outer_width}', '${outer_height}']
+    parameters:
+
+      width: '${outer_width}'
+
+      height: '${outer_width}'
+
+      depth: '${outer_height}'
 """
 
 
@@ -280,7 +292,13 @@ metadata:
 parts:
   base:
     primitive: box
-    size: [100, 100, 10]
+    parameters:
+
+      width: 100
+
+      height: 100
+
+      depth: 10
 
   post:
     primitive: cylinder
@@ -308,7 +326,13 @@ metadata:
 parts:
   base:
     primitive: box
-    size: [100, 100, 10]
+    parameters:
+
+      width: 100
+
+      height: 100
+
+      depth: 10
 
   post:
     primitive: cylinder

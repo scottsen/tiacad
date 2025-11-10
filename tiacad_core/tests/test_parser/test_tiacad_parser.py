@@ -26,7 +26,13 @@ class TestBasicParsing:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         doc = TiaCADParser.parse_string(yaml_content)
 
@@ -44,7 +50,13 @@ parameters:
 parts:
   box:
     primitive: box
-    size: ['${width}', '${height}', 20]
+    parameters:
+
+      width: '${width}'
+
+      height: '${height}'
+
+      depth: 20
 """
         doc = TiaCADParser.parse_string(yaml_content)
 
@@ -63,7 +75,13 @@ metadata:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         doc = TiaCADParser.parse_string(yaml_content)
 
@@ -81,7 +99,13 @@ class TestWithOperations:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 
 operations:
   box_moved:
@@ -101,7 +125,13 @@ operations:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 
 operations:
   box1:
@@ -143,15 +173,33 @@ parameters:
 parts:
   plate:
     primitive: box
-    size: ['${plate_w}', '${plate_t}', 80]
+    parameters:
+
+      width: '${plate_w}'
+
+      height: '${plate_t}'
+
+      depth: 80
 
   beam:
     primitive: box
-    size: [32, 75, 24]
+    parameters:
+
+      width: 32
+
+      height: 75
+
+      depth: 24
 
   arm:
     primitive: box
-    size: [22, '${arm_len}', 16]
+    parameters:
+
+      width: 22
+
+      height: '${arm_len}'
+
+      depth: 16
 
 operations:
   left_arm:
@@ -210,7 +258,13 @@ class TestFileOperations:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         # Create temporary file
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
@@ -240,7 +294,13 @@ class TestExport:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         doc = TiaCADParser.parse_string(yaml_content)
 
@@ -262,7 +322,13 @@ parts:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 
 operations:
   box_moved:
@@ -290,7 +356,13 @@ operations:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         doc = TiaCADParser.parse_string(yaml_content)
 
@@ -315,7 +387,13 @@ class TestValidation:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
             f.write(yaml_content)
@@ -334,7 +412,13 @@ parts:
 parts:
   box:
     primitive: invalid_primitive
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
             f.write(yaml_content)
@@ -368,8 +452,8 @@ metadata:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10
-"""  # Missing closing bracket
+    parameters: {width: 10, height: 10, depth: 10
+"""  # Missing closing brace - invalid YAML
         with pytest.raises(TiaCADParserError) as exc_info:
             TiaCADParser.parse_string(yaml_content)
 
@@ -385,7 +469,7 @@ class TestConvenienceFunction:
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters: {width: 10, height: 10, depth: 10}
 """
         with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
             f.write(yaml_content)

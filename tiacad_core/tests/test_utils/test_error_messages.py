@@ -142,7 +142,13 @@ class TestErrorFormatting:
 parts:
   box:
     primitive: invalid_type
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
 
         error_msg = format_error_with_context(
@@ -240,7 +246,13 @@ class TestRealWorldExamples:
         yaml_str = """parts:
   plate:
     primitive: box
-    size: [100, 100, 10]
+    parameters:
+
+      width: 100
+
+      height: 100
+
+      depth: 10
 
 operations:
   subtract:
@@ -271,7 +283,13 @@ operations:
         yaml_str = """parts:
   box1:
     primitive: square
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
 
         error = TiaCADError(

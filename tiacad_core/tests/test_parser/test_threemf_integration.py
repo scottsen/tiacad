@@ -30,7 +30,13 @@ schema_version: "2.0"
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         yaml_path.write_text(yaml_content)
         return yaml_path
@@ -95,7 +101,13 @@ colors:
 parts:
   red_box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: bright-red
 
   blue_cylinder:
@@ -172,12 +184,24 @@ schema_version: "2.0"
 parts:
   aluminum_base:
     primitive: box
-    size: [100, 100, 5]
+    parameters:
+
+      width: 100
+
+      height: 100
+
+      depth: 5
     material: aluminum
 
   plastic_body:
     primitive: box
-    size: [80, 80, 30]
+    parameters:
+
+      width: 80
+
+      height: 80
+
+      depth: 30
     material: pla-white
 
   rubber_handle:
@@ -238,12 +262,24 @@ schema_version: "2.0"
 parts:
   window:
     primitive: box
-    size: [40, 30, 2]
+    parameters:
+
+      width: 40
+
+      height: 30
+
+      depth: 2
     color: [0.0, 0.5, 1.0, 0.3]  # Transparent blue
 
   opaque_frame:
     primitive: box
-    size: [50, 40, 3]
+    parameters:
+
+      width: 50
+
+      height: 40
+
+      depth: 3
     color: [0.2, 0.2, 0.2, 1.0]  # Opaque gray
 """
         yaml_path.write_text(yaml_content)
@@ -288,12 +324,24 @@ colors:
 parts:
   base_plate:
     primitive: box
-    size: [120, 100, 5]
+    parameters:
+
+      width: 120
+
+      height: 100
+
+      depth: 5
     material: aluminum
 
   main_body:
     primitive: box
-    size: [100, 80, 30]
+    parameters:
+
+      width: 100
+
+      height: 80
+
+      depth: 30
     color: brand-blue
 
   handle:
@@ -304,12 +352,24 @@ parts:
 
   window:
     primitive: box
-    size: [40, 30, 2]
+    parameters:
+
+      width: 40
+
+      height: 30
+
+      depth: 2
     color: [0.0, 0.5, 1.0, 0.3]
 
   label:
     primitive: box
-    size: [20, 10, 1]
+    parameters:
+
+      width: 20
+
+      height: 10
+
+      depth: 1
     color: "#FFFF00"  # Yellow hex
 
   button:
@@ -407,7 +467,13 @@ metadata:
 parts:
   part1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         yaml_path.write_text(yaml_content)
         return yaml_path
@@ -515,7 +581,13 @@ schema_version: "2.0"
 parts:
   box1:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 
   cylinder1:
     primitive: cylinder
@@ -546,7 +618,13 @@ schema_version: "2.0"
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         yaml_path.write_text(yaml_content)
         output_path = tmp_path / "overwrite.3mf"
@@ -583,7 +661,13 @@ schema_version: "2.0"
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
     color: "#FF0000"
 """
         yaml_path.write_text(yaml_content)
@@ -615,7 +699,13 @@ schema_version: "2.0"
 parts:
   box:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 """
         yaml_path.write_text(yaml_content)
 

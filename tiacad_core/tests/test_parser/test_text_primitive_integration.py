@@ -308,7 +308,13 @@ parameters:
 parts:
   base:
     primitive: box
-    size: [100, 40, 3]
+    parameters:
+
+      width: 100
+
+      height: 40
+
+      depth: 3
 
   product_name:
     primitive: text
@@ -338,7 +344,13 @@ parameters:
 parts:
   plate:
     primitive: box
-    size: [60, 30, 2]
+    parameters:
+
+      width: 60
+
+      height: 30
+
+      depth: 2
 
   serial_text:
     primitive: text

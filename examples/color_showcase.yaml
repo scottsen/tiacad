@@ -73,7 +73,13 @@ parts:
 
   red_box:
     primitive: box
-    size: [20, 20, 20]
+    parameters:
+
+      width: 20
+
+      height: 20
+
+      depth: 20
     origin: center
     color: red                    # Simple named color
 
@@ -96,13 +102,25 @@ parts:
 
   base_plate:
     primitive: box
-    size: ['${base_size}', '${base_size}', '${base_thickness}']
+    parameters:
+
+      width: '${base_size}'
+
+      height: '${base_size}'
+
+      depth: '${base_thickness}'
     origin: center
     color: brand-blue             # Reference to colors: section
 
   accent_detail:
     primitive: box
-    size: [30, 30, 5]
+    parameters:
+
+      width: 30
+
+      height: 30
+
+      depth: 5
     origin: center
     color: accent                 # Another palette reference
 
@@ -112,7 +130,13 @@ parts:
 
   aluminum_bracket:
     primitive: box
-    size: [80, 40, 6]
+    parameters:
+
+      width: 80
+
+      height: 40
+
+      depth: 6
     origin: center
     material: aluminum            # Built-in material
 
@@ -143,13 +167,25 @@ parts:
 
   custom_cover:
     primitive: box
-    size: [90, 90, 3]
+    parameters:
+
+      width: 90
+
+      height: 90
+
+      depth: 3
     origin: center
     material: blue-aluminum       # Custom material from materials: section
 
   black_detail:
     primitive: box
-    size: [20, 20, 8]
+    parameters:
+
+      width: 20
+
+      height: 20
+
+      depth: 8
     origin: center
     material: matte-black         # Another custom material
 
@@ -170,7 +206,13 @@ parts:
 
   brushed_plate:
     primitive: box
-    size: [70, 70, 4]
+    parameters:
+
+      width: 70
+
+      height: 70
+
+      depth: 4
     origin: center
     appearance:
       color: [0.7, 0.7, 0.7]
@@ -184,7 +226,13 @@ parts:
 
   window:
     primitive: box
-    size: [60, 60, 3]
+    parameters:
+
+      width: 60
+
+      height: 60
+
+      depth: 3
     origin: center
     appearance:
       color: [0.8, 0.9, 1.0]      # Light blue
@@ -197,13 +245,25 @@ parts:
 
   print_structure:
     primitive: box
-    size: [50, 50, 20]
+    parameters:
+
+      width: 50
+
+      height: 50
+
+      depth: 20
     origin: center
     material: red-pla             # Custom print material
 
   print_support:
     primitive: box
-    size: [50, 50, 2]
+    parameters:
+
+      width: 50
+
+      height: 50
+
+      depth: 2
     origin: center
     material: pla-natural         # Built-in print material
 

@@ -21,7 +21,7 @@ class TestBox:
         spec = {
             'plate': {
                 'primitive': 'box',
-                'size': [100, 50, 25]
+                'parameters': {'width': 100, 'height': 50, 'depth': 25}
             }
         }
 
@@ -44,7 +44,7 @@ class TestBox:
         spec = {
             'box': {
                 'primitive': 'box',
-                'size': ['${width}', '${depth}', '${height}']
+                'parameters': {'width': '${width}', 'height': '${depth}', 'depth': '${height}'}
             }
         }
 
@@ -63,7 +63,7 @@ class TestBox:
         spec = {
             'box': {
                 'primitive': 'box',
-                'size': ['${base_size}', '${base_size / 2}', '${base_size / 4}']
+                'parameters': {'width': '${base_size}', 'height': '${base_size / 2}', 'depth': '${base_size / 4}'}
             }
         }
 
@@ -80,7 +80,7 @@ class TestBox:
         spec = {
             'box': {
                 'primitive': 'box',
-                'size': [10, 10, 10],
+                'parameters': {'width': 10, 'height': 10, 'depth': 10},
                 'origin': 'center'
             }
         }
@@ -98,7 +98,7 @@ class TestBox:
         spec = {
             'box': {
                 'primitive': 'box',
-                'size': [10, 10, 10],
+                'parameters': {'width': 10, 'height': 10, 'depth': 10},
                 'origin': 'corner'
             }
         }
@@ -111,7 +111,7 @@ class TestBox:
         assert part is not None
 
     def test_box_missing_size(self):
-        """Test box without size parameter"""
+        """Test box without parameters"""
         params = {}
         spec = {
             'box': {
@@ -125,15 +125,15 @@ class TestBox:
         with pytest.raises(PartsBuilderError) as exc_info:
             builder.build_parts(spec)
 
-        assert 'size' in str(exc_info.value).lower()
+        assert 'missing required parameters' in str(exc_info.value).lower()
 
     def test_box_invalid_size(self):
-        """Test box with invalid size"""
+        """Test box with partial parameters"""
         params = {}
         spec = {
             'box': {
                 'primitive': 'box',
-                'size': [10, 20]  # Only 2 dimensions
+                'parameters': {'width': 10, 'height': 20}  # Missing depth
             }
         }
 
@@ -143,7 +143,7 @@ class TestBox:
         with pytest.raises(PartsBuilderError) as exc_info:
             builder.build_parts(spec)
 
-        assert 'size' in str(exc_info.value).lower()
+        assert 'depth' in str(exc_info.value).lower()
 
 
 class TestCylinder:
@@ -366,11 +366,11 @@ class TestMultipleParts:
         spec = {
             'plate': {
                 'primitive': 'box',
-                'size': ['${plate_w}', '${plate_t}', '${plate_h}']
+                'parameters': {'width': '${plate_w}', 'height': '${plate_t}', 'depth': '${plate_h}'}
             },
             'beam': {
                 'primitive': 'box',
-                'size': ['${beam_w}', '${beam_len}', '${beam_h}']
+                'parameters': {'width': '${beam_w}', 'height': '${beam_len}', 'depth': '${beam_h}'}
             },
             'screw_hole': {
                 'primitive': 'cylinder',
@@ -397,7 +397,7 @@ class TestErrorHandling:
         params = {}
         spec = {
             'bad_part': {
-                'size': [10, 10, 10]
+                'parameters': {'width': 10, 'height': 10, 'depth': 10}
             }
         }
 
@@ -415,7 +415,7 @@ class TestErrorHandling:
         spec = {
             'bad_part': {
                 'primitive': 'unknown_shape',
-                'size': [10, 10, 10]
+                'parameters': {'width': 10, 'height': 10, 'depth': 10}
             }
         }
 
@@ -437,7 +437,7 @@ class TestMetadata:
         spec = {
             'box': {
                 'primitive': 'box',
-                'size': [10, 10, 10]
+                'parameters': {'width': 10, 'height': 10, 'depth': 10}
             }
         }
 
@@ -470,7 +470,7 @@ class TestGuitarHangerExample:
         spec = {
             'plate': {
                 'primitive': 'box',
-                'size': ['${plate_w}', '${plate_t}', '${plate_h}'],
+                'parameters': {'width': '${plate_w}', 'height': '${plate_t}', 'depth': '${plate_h}'},
                 'origin': 'center'
             },
             'screw_hole': {
@@ -481,12 +481,12 @@ class TestGuitarHangerExample:
             },
             'beam': {
                 'primitive': 'box',
-                'size': ['${beam_w}', '${beam_len}', '${beam_h}'],
+                'parameters': {'width': '${beam_w}', 'height': '${beam_len}', 'depth': '${beam_h}'},
                 'origin': 'center'
             },
             'arm': {
                 'primitive': 'box',
-                'size': ['${arm_w}', '${arm_len}', '${arm_h}'],
+                'parameters': {'width': '${arm_w}', 'height': '${arm_len}', 'depth': '${arm_h}'},
                 'origin': 'center'
             }
         }

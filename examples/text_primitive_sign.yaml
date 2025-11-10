@@ -19,7 +19,13 @@ parts:
   # Base plate
   base_plate:
     primitive: box
-    size: [120, 60, 5]
+    parameters:
+
+      width: 120
+
+      height: 60
+
+      depth: 5
     origin: center
     color: yellow
 

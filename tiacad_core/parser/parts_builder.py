@@ -163,7 +163,7 @@ class PartsBuilder:
 
         Args:
             name: Part name (for error messages)
-            spec: Specification with 'size' [width, depth, height] and optional 'origin'
+            spec: Specification with 'parameters' containing width, height, depth
 
         Returns:
             CadQuery Workplane with box geometry
@@ -171,20 +171,21 @@ class PartsBuilder:
         Raises:
             PartsBuilderError: If required parameters missing
         """
-        if 'size' not in spec:
+        # Extract parameters (check 'parameters' key first, fall back to spec for backward compat)
+        params = spec.get('parameters', spec)
+
+        # Validate required parameters
+        required = ['width', 'height', 'depth']
+        missing = [p for p in required if p not in params]
+        if missing:
             raise PartsBuilderError(
-                f"Box '{name}' missing required 'size' parameter",
+                f"Box '{name}' missing required parameters: {', '.join(missing)}",
                 part_name=name
             )
 
-        size = spec['size']
-        if not isinstance(size, list) or len(size) != 3:
-            raise PartsBuilderError(
-                f"Box '{name}' size must be [width, depth, height], got: {size}",
-                part_name=name
-            )
-
-        width, depth, height = size
+        width = params['width']
+        height = params['height']
+        depth = params['depth']
         origin = spec.get('origin', 'center')
 
         # Create box at origin
@@ -198,7 +199,7 @@ class PartsBuilder:
 
         Args:
             name: Part name
-            spec: Specification with 'radius', 'height', and optional 'origin'
+            spec: Specification with 'parameters' containing radius, height
 
         Returns:
             CadQuery Workplane with cylinder geometry
@@ -206,19 +207,20 @@ class PartsBuilder:
         Raises:
             PartsBuilderError: If required parameters missing
         """
-        if 'radius' not in spec:
+        # Extract parameters (check 'parameters' key first, fall back to spec for backward compat)
+        params = spec.get('parameters', spec)
+
+        # Validate required parameters
+        required = ['radius', 'height']
+        missing = [p for p in required if p not in params]
+        if missing:
             raise PartsBuilderError(
-                f"Cylinder '{name}' missing required 'radius' parameter",
-                part_name=name
-            )
-        if 'height' not in spec:
-            raise PartsBuilderError(
-                f"Cylinder '{name}' missing required 'height' parameter",
+                f"Cylinder '{name}' missing required parameters: {', '.join(missing)}",
                 part_name=name
             )
 
-        radius = spec['radius']
-        height = spec['height']
+        radius = params['radius']
+        height = params['height']
         origin = spec.get('origin', 'center')
 
         # Create cylinder
@@ -237,7 +239,7 @@ class PartsBuilder:
 
         Args:
             name: Part name
-            spec: Specification with 'radius'
+            spec: Specification with 'parameters' containing radius
 
         Returns:
             CadQuery Workplane with sphere geometry
@@ -245,13 +247,16 @@ class PartsBuilder:
         Raises:
             PartsBuilderError: If required parameters missing
         """
-        if 'radius' not in spec:
+        # Extract parameters (check 'parameters' key first, fall back to spec for backward compat)
+        params = spec.get('parameters', spec)
+
+        if 'radius' not in params:
             raise PartsBuilderError(
-                f"Sphere '{name}' missing required 'radius' parameter",
+                f"Sphere '{name}' missing required parameter: radius",
                 part_name=name
             )
 
-        radius = spec['radius']
+        radius = params['radius']
 
         # Create sphere at origin (always centered)
         sphere = cq.Workplane("XY").sphere(radius)
@@ -264,7 +269,7 @@ class PartsBuilder:
 
         Args:
             name: Part name
-            spec: Specification with 'radius1' (base), 'radius2' (top), 'height'
+            spec: Specification with 'parameters' containing radius1, radius2, height
 
         Returns:
             CadQuery Workplane with cone geometry
@@ -272,25 +277,21 @@ class PartsBuilder:
         Raises:
             PartsBuilderError: If required parameters missing
         """
-        if 'radius1' not in spec:
+        # Extract parameters (check 'parameters' key first, fall back to spec for backward compat)
+        params = spec.get('parameters', spec)
+
+        # Validate required parameters
+        required = ['radius1', 'radius2', 'height']
+        missing = [p for p in required if p not in params]
+        if missing:
             raise PartsBuilderError(
-                f"Cone '{name}' missing required 'radius1' parameter (base radius)",
-                part_name=name
-            )
-        if 'radius2' not in spec:
-            raise PartsBuilderError(
-                f"Cone '{name}' missing required 'radius2' parameter (top radius)",
-                part_name=name
-            )
-        if 'height' not in spec:
-            raise PartsBuilderError(
-                f"Cone '{name}' missing required 'height' parameter",
+                f"Cone '{name}' missing required parameters: {', '.join(missing)}",
                 part_name=name
             )
 
-        radius1 = spec['radius1']  # Base radius
-        radius2 = spec['radius2']  # Top radius
-        height = spec['height']
+        radius1 = params['radius1']  # Base radius
+        radius2 = params['radius2']  # Top radius
+        height = params['height']
         origin = spec.get('origin', 'center')
 
         # Create cone using loft between two circles
@@ -325,7 +326,7 @@ class PartsBuilder:
 
         Args:
             name: Part name
-            spec: Specification with 'major_radius' and 'minor_radius'
+            spec: Specification with 'parameters' containing major_radius, minor_radius
 
         Returns:
             CadQuery Workplane with torus geometry
@@ -333,19 +334,20 @@ class PartsBuilder:
         Raises:
             PartsBuilderError: If required parameters missing
         """
-        if 'major_radius' not in spec:
+        # Extract parameters (check 'parameters' key first, fall back to spec for backward compat)
+        params = spec.get('parameters', spec)
+
+        # Validate required parameters
+        required = ['major_radius', 'minor_radius']
+        missing = [p for p in required if p not in params]
+        if missing:
             raise PartsBuilderError(
-                f"Torus '{name}' missing required 'major_radius' parameter",
-                part_name=name
-            )
-        if 'minor_radius' not in spec:
-            raise PartsBuilderError(
-                f"Torus '{name}' missing required 'minor_radius' parameter",
+                f"Torus '{name}' missing required parameters: {', '.join(missing)}",
                 part_name=name
             )
 
-        major_radius = spec['major_radius']  # Distance from center to tube center
-        minor_radius = spec['minor_radius']  # Tube radius
+        major_radius = params['major_radius']  # Distance from center to tube center
+        minor_radius = params['minor_radius']  # Tube radius
 
         # Create torus using revolve
         # Draw circle at (major_radius, 0) with radius minor_radius, then revolve around Z

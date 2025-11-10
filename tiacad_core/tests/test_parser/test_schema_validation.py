@@ -200,7 +200,7 @@ class TestParserIntegration:
             "parts": {
                 "box1": {
                     "primitive": "box",
-                    "size": [10, 10, 10]
+                    "parameters": {"width": 10, "height": 10, "depth": 10}
                 }
             }
         }
@@ -214,7 +214,7 @@ class TestParserIntegration:
             "parts": {
                 "box1": {
                     "primitive": "box",
-                    "size": [10, 10, 10]
+                    "parameters": {"width": 10, "height": 10, "depth": 10}
                 }
             }
         }

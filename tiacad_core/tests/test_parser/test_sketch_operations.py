@@ -27,7 +27,7 @@ class TestExtrudeOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'box': {
@@ -58,7 +58,7 @@ class TestExtrudeOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'cylinder': {
@@ -84,7 +84,7 @@ class TestExtrudeOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'box': {
@@ -116,7 +116,7 @@ class TestExtrudeOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'pillar': {
@@ -135,7 +135,7 @@ class TestExtrudeOperation:
         yaml_data = {
             'sketches': {},
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'box': {
@@ -154,7 +154,7 @@ class TestExtrudeOperation:
         yaml_data = {
             'sketches': {},
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'box': {
@@ -185,7 +185,7 @@ class TestRevolveOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'vase': {
@@ -212,7 +212,7 @@ class TestRevolveOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'arc': {
@@ -240,7 +240,7 @@ class TestRevolveOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'torus': {
@@ -260,7 +260,7 @@ class TestRevolveOperation:
         yaml_data = {
             'sketches': {},
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'vase': {
@@ -290,7 +290,7 @@ class TestSweepOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'pipe': {
@@ -320,7 +320,7 @@ class TestSweepOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'curved_pipe': {
@@ -345,7 +345,7 @@ class TestSweepOperation:
         yaml_data = {
             'sketches': {},
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'pipe': {
@@ -369,7 +369,7 @@ class TestSweepOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'pipe': {
@@ -407,7 +407,7 @@ class TestLoftOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'transition': {
@@ -448,7 +448,7 @@ class TestLoftOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'vase': {
@@ -481,7 +481,7 @@ class TestLoftOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'pyramid': {
@@ -501,7 +501,7 @@ class TestLoftOperation:
         yaml_data = {
             'sketches': {},
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'transition': {
@@ -524,7 +524,7 @@ class TestLoftOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'invalid': {
@@ -548,7 +548,7 @@ class TestLoftOperation:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'invalid': {
@@ -585,7 +585,7 @@ class TestSketchOperationIntegration:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'cylinder': {
@@ -624,7 +624,7 @@ class TestSketchOperationIntegration:
                 }
             },
             'parts': {
-                'dummy': {'primitive': 'box', 'size': [1, 1, 1]}
+                'dummy': {'primitive': 'box', 'parameters': {'width': 1, 'height': 1, 'depth': 1}}
             },
             'operations': {
                 'outer_cyl': {

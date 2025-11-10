@@ -37,7 +37,13 @@ parameters:
 parts:
   base:
     primitive: box
-    size: [50, 50, 10]
+    parameters:
+
+      width: 50
+
+      height: 50
+
+      depth: 10
 
 operations:
   support_gusset:
@@ -80,7 +86,13 @@ metadata:
 parts:
   base:
     primitive: box
-    size: [20, 20, 5]
+    parameters:
+
+      width: 20
+
+      height: 20
+
+      depth: 5
 
 operations:
   test_gusset:
@@ -124,7 +136,13 @@ metadata:
 parts:
   base_plate:
     primitive: box
-    size: [60, 60, 8]
+    parameters:
+
+      width: 60
+
+      height: 60
+
+      depth: 8
     origin: center
 
 operations:
@@ -169,7 +187,13 @@ metadata:
 parts:
   dummy:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 
 operations:
   base_gusset:
@@ -215,7 +239,13 @@ metadata:
 parts:
   dummy:
     primitive: box
-    size: [5, 5, 5]
+    parameters:
+
+      width: 5
+
+      height: 5
+
+      depth: 5
 
 operations:
   single_gusset:
@@ -267,7 +297,13 @@ parameters:
 parts:
   structure:
     primitive: box
-    size: [100, 100, 10]
+    parameters:
+
+      width: 100
+
+      height: 100
+
+      depth: 10
 
 operations:
   gusset_1:
@@ -329,17 +365,35 @@ metadata:
 parts:
   plate:
     primitive: box
-    size: [100, 10, 90]
+    parameters:
+
+      width: 100
+
+      height: 10
+
+      depth: 90
     origin: center
 
   beam:
     primitive: box
-    size: [75, 10, 10]
+    parameters:
+
+      width: 75
+
+      height: 10
+
+      depth: 10
     origin: center
 
   arm:
     primitive: box
-    size: [30, 70, 10]
+    parameters:
+
+      width: 30
+
+      height: 70
+
+      depth: 10
     origin: center
 
 operations:
@@ -404,12 +458,24 @@ metadata:
 parts:
   base_plate:
     primitive: box
-    size: [80, 80, 6]
+    parameters:
+
+      width: 80
+
+      height: 80
+
+      depth: 6
     origin: corner
 
   vertical_plate:
     primitive: box
-    size: [80, 6, 60]
+    parameters:
+
+      width: 80
+
+      height: 6
+
+      depth: 60
     origin: corner
 
 operations:
@@ -468,7 +534,13 @@ metadata:
 parts:
   dummy:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 
 operations:
   bad_gusset:
@@ -506,7 +578,13 @@ metadata:
 parts:
   dummy:
     primitive: box
-    size: [10, 10, 10]
+    parameters:
+
+      width: 10
+
+      height: 10
+
+      depth: 10
 
 operations:
   test_gusset:
@@ -546,7 +624,13 @@ metadata:
 parts:
   dummy:
     primitive: box
-    size: [5, 5, 5]
+    parameters:
+
+      width: 5
+
+      height: 5
+
+      depth: 5
 
 operations:
   gusset_a:
@@ -604,7 +688,13 @@ metadata:
 parts:
   dummy:
     primitive: box
-    size: [5, 5, 5]
+    parameters:
+
+      width: 5
+
+      height: 5
+
+      depth: 5
 
 operations:
   gusset_1:

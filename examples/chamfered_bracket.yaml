@@ -27,13 +27,25 @@ parts:
   # Base plate (horizontal)
   base_plate:
     primitive: box
-    size: ['${base_width}', '${base_depth}', '${base_thickness}']
+    parameters:
+
+      width: '${base_width}'
+
+      height: '${base_depth}'
+
+      depth: '${base_thickness}'
     origin: corner
 
   # Vertical plate (stands up from base)
   vertical_plate:
     primitive: box
-    size: ['${base_width}', '${vertical_thickness}', '${vertical_height}']
+    parameters:
+
+      width: '${base_width}'
+
+      height: '${vertical_thickness}'
+
+      depth: '${vertical_height}'
     origin: corner
 
   # Mounting holes in base
