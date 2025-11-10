@@ -427,7 +427,42 @@ tiacad/
 
 **Deliverable:** Complete CAD system with sketch-based modeling ✅
 
-### Phase 4: Advanced Features (Planned)
+---
+
+## What's Next?
+
+### v3.1: Dependency Graph (DAG) - Next Milestone 🎯
+
+**Duration:** 6-8 weeks
+**Goal:** True parametric modeling with incremental rebuilds
+
+**Features:**
+- ModelGraph using networkx for dependency tracking
+- Incremental rebuild (10x faster for parameter changes)
+- `--watch` mode for auto-rebuild on YAML changes
+- `--show-deps` command for graph visualization
+- Parameter → Part → Operation dependency tracking
+
+**Target:** v3.1.0 release (Late December 2025)
+
+### v3.2: Explicit Constraints
+
+**Duration:** 4-6 weeks
+**Dependencies:** v3.1 complete
+
+**Features:**
+- Constraint YAML schema (flush, coaxial, offset)
+- Manual constraint specification (user sets positions)
+- Constraint validation and conflict detection
+- Integration with ModelGraph
+
+**Target:** v3.2.0 release (Early 2026)
+
+---
+
+## Future Roadmap
+
+### Advanced Features (v4.0+)
 
 **Constraints & Assemblies:**
 - [ ] Attachment constraints (mate, align, coincide)

@@ -2,8 +2,22 @@
 
 **Document Version:** 1.0
 **Date:** 2025-11-02
-**Status:** Strategic Planning
+**Status:** Strategic Planning (Historical Reference)
 **Author:** TIA
+
+> **📝 PHASE NUMBERING NOTE (Updated 2025-11-10):**
+>
+> This document uses different phase numbering than README.md:
+> - **This doc:** "Phase 3" = spatial references, "Phase 4" = DAG/constraints
+> - **README.md:** "Phase 3" = sketch ops (v3.0), "v3.1" = DAG, "v3.2" = constraints
+>
+> **Current Reality (Nov 10, 2025):**
+> - ✅ v3.0 COMPLETE - Phases 1-4 in this doc are done (896 tests, spatial refs)
+> - 📋 v3.1 NEXT - "Phase 5a" in this doc (DAG implementation)
+> - 📋 v3.2 PLANNED - "Phase 5b" in this doc (Explicit constraints)
+>
+> Use this document for strategic planning context.
+> See README.md and PROJECT.md for current status and versioning.
 
 ---
 
