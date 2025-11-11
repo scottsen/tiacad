@@ -338,7 +338,7 @@ class TestMeshGeneration:
 
             mock_mesh.SetGeometry = capture_geometry
 
-            mesh_obj = exporter._create_mesh_object(model, part, "cylinder")
+            _mesh_obj = exporter._create_mesh_object(model, part, "cylinder")
 
             # Should have captured geometry
             assert vertices_captured is not None

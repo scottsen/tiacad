@@ -111,7 +111,7 @@ class TestNamedReferences:
     def test_clear_cache(self):
         """Test clearing the resolution cache"""
         # Resolve and cache
-        ref1 = self.resolver.resolve('origin')
+        _ref1 = self.resolver.resolve('origin')
         assert 'origin' in self.resolver._cache
 
         # Clear cache

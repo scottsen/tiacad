@@ -6,11 +6,14 @@ Implements text operations for engraving and embossing text on part faces.
 
 import cadquery as cq
 import logging
-from typing import Dict, Any, Optional, List, Tuple
+from typing import Dict, Any, Optional, List, Tuple, TYPE_CHECKING
 
 from ..part import Part, PartRegistry
 from .parameter_resolver import ParameterResolver
 from ..selector_resolver import SelectorResolver, FeatureType
+
+if TYPE_CHECKING:
+    from .yaml_with_lines import LineTracker
 
 logger = logging.getLogger(__name__)
 

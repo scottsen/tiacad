@@ -158,7 +158,7 @@ parts:
     height: 4
 """
         doc = TiaCADParser.parse_string(yaml_content)
-        part = doc.get_part('export_text')
+        _part = doc.get_part('export_text')
 
         # Export to temp file
         with tempfile.NamedTemporaryFile(suffix='.stl', delete=False) as f:

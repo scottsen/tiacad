@@ -116,7 +116,7 @@ class TestBasicTransforms:
         geometry = MockWorkplane(center_point=(0, 0, 0))
         tracker = TransformTracker(geometry)
 
-        result = tracker.apply_transform({
+        _result = tracker.apply_transform({
             'type': 'rotate',
             'angle': 45,
             'axis': 'Z',
@@ -141,7 +141,7 @@ class TestOriginResolution:
         geometry = MockWorkplane(center_point=(0, 0, 0))
         tracker = TransformTracker(geometry)
 
-        result = tracker.apply_transform({
+        _result = tracker.apply_transform({
             'type': 'rotate',
             'angle': 45,
             'axis': 'Z',
@@ -160,7 +160,7 @@ class TestOriginResolution:
         tracker.apply_transform({'type': 'translate', 'offset': [10, 20, 0]})
 
         # Rotate around 'current' position
-        result = tracker.apply_transform({
+        _result = tracker.apply_transform({
             'type': 'rotate',
             'angle': 45,
             'axis': 'Z',
@@ -180,7 +180,7 @@ class TestOriginResolution:
         assert tracker.current_position == (15, 5, 5)
 
         # Rotate around 'initial' position
-        result = tracker.apply_transform({
+        _result = tracker.apply_transform({
             'type': 'rotate',
             'angle': 45,
             'axis': 'Z',

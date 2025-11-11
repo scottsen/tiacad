@@ -166,7 +166,7 @@ def test_performance_comparison():
     for _ in range(100):
         box = mock_backend.create_box(10, 10, 10)
         cylinder = mock_backend.create_cylinder(5, 20)
-        union = mock_backend.boolean_union(box, cylinder)
+        _union = mock_backend.boolean_union(box, cylinder)
     mock_time = time.time() - start
 
     # Time CadQueryBackend
@@ -174,7 +174,7 @@ def test_performance_comparison():
     for _ in range(100):
         box = cq_backend.create_box(10, 10, 10)
         cylinder = cq_backend.create_cylinder(5, 20)
-        union = cq_backend.boolean_union(box, cylinder)
+        _union = cq_backend.boolean_union(box, cylinder)
     cq_time = time.time() - start
 
     # MockBackend should be significantly faster

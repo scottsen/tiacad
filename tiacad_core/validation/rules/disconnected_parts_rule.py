@@ -73,7 +73,7 @@ class DisconnectedPartsRule(ValidationRule):
             if self._has_valid_geometry(part):
                 try:
                     bboxes[part_name] = self._get_bounding_box(part.geometry)
-                except:
+                except Exception:
                     pass  # Skip parts with invalid bounding boxes
 
         return bboxes

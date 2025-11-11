@@ -8,7 +8,7 @@ and manipulations.
 from typing import Tuple
 
 
-def hsl_to_rgb(h: float, s: float, l: float) -> Tuple[float, float, float]:
+def hsl_to_rgb(h: float, s: float, lightness: float) -> Tuple[float, float, float]:
     """
     Convert HSL (0-1 range) to RGB (0-1 range)
 
@@ -17,7 +17,7 @@ def hsl_to_rgb(h: float, s: float, l: float) -> Tuple[float, float, float]:
     Args:
         h: Hue (0-1 range, 0=red, 0.33=green, 0.67=blue)
         s: Saturation (0-1 range, 0=gray, 1=full color)
-        l: Lightness (0-1 range, 0=black, 0.5=pure, 1=white)
+        lightness: Lightness (0-1 range, 0=black, 0.5=pure, 1=white)
 
     Returns:
         (r, g, b) tuple in 0-1 range
@@ -34,7 +34,7 @@ def hsl_to_rgb(h: float, s: float, l: float) -> Tuple[float, float, float]:
     """
     if s == 0:
         # Achromatic (gray) - no saturation
-        return (l, l, l)
+        return (lightness, lightness, lightness)
 
     def hue_to_rgb(p: float, q: float, t: float) -> float:
         """Helper to convert hue to RGB component"""
@@ -54,8 +54,8 @@ def hsl_to_rgb(h: float, s: float, l: float) -> Tuple[float, float, float]:
         return p
 
     # Calculate intermediate values
-    q = l * (1 + s) if l < 0.5 else l + s - l * s
-    p = 2 * l - q
+    q = lightness * (1 + s) if lightness < 0.5 else lightness + s - lightness * s
+    p = 2 * lightness - q
 
     # Calculate RGB components with hue offset
     r = hue_to_rgb(p, q, h + 1/3)
@@ -199,14 +199,14 @@ def validate_rgb_255_range(*values: float) -> None:
             )
 
 
-def validate_hsl_range(h: float, s: float, l: float) -> None:
+def validate_hsl_range(h: float, s: float, lightness: float) -> None:
     """
     Validate HSL values are in correct ranges
 
     Args:
         h: Hue (0-360 degrees)
         s: Saturation (0-100 %)
-        l: Lightness (0-100 %)
+        lightness: Lightness (0-100 %)
 
     Raises:
         ValueError: If values are out of range
@@ -215,8 +215,8 @@ def validate_hsl_range(h: float, s: float, l: float) -> None:
         raise ValueError(f"HSL hue must be 0-360 degrees: {h}")
     if not (0 <= s <= 100):
         raise ValueError(f"HSL saturation must be 0-100%: {s}")
-    if not (0 <= l <= 100):
-        raise ValueError(f"HSL lightness must be 0-100%: {l}")
+    if not (0 <= lightness <= 100):
+        raise ValueError(f"HSL lightness must be 0-100%: {lightness}")
 
 
 def clamp(value: float, min_val: float = 0.0, max_val: float = 1.0) -> float:

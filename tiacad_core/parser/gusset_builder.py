@@ -285,22 +285,20 @@ class GussetBuilder:
         # This is more reliable than trying to sketch on arbitrary planes
 
         try:
-            # Create first triangle
-            face1 = (cq.Workplane("XY")
+            # Note: Initial approach using extruded faces was abandoned
+            # in favor of wire-based lofting (see below)
+            # Keeping as reference for potential future improvements
+            _face1 = (cq.Workplane("XY")
                     .polyline([p0, p1, p2])
                     .close()
                     .extrude(0.001))  # Tiny extrusion to create solid
 
-            # Create second triangle
-            face2 = (cq.Workplane("XY")
+            _face2 = (cq.Workplane("XY")
                     .polyline([p0_offset, p1_offset, p2_offset])
                     .close()
                     .extrude(0.001))
 
-            # Alternative: Use box and boolean operations
-            # More reliable for Phase 1
-
-            # Actually, let's use the simplest approach: Loft
+            # Actually, use wire-based approach (most reliable)
             # Create two wire triangles and loft between them
 
             # Reset - use makePolygon for robust 3D polyline

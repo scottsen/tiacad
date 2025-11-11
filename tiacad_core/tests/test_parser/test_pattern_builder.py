@@ -595,7 +595,7 @@ def test_grid_with_z_offset(builder, registry):
         'spacing': [10, 10, 5]  # Z offset of 5
     }
 
-    parts = builder.execute_pattern_operation('z_grid', spec)
+    _parts = builder.execute_pattern_operation('z_grid', spec)
 
     # All parts should be at Z=5
     for row in range(2):

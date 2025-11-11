@@ -126,7 +126,7 @@ class TestMockBackend:
     def test_translate(self, backend):
         """Translate updates center position"""
         box = backend.create_box(10, 10, 10)
-        original_center = box.center
+        _original_center = box.center
 
         moved = backend.translate(box, (5, 10, 15))
 
@@ -171,7 +171,7 @@ class TestMockBackend:
 
         box = backend.create_box(10, 10, 10)
         cylinder = backend.create_cylinder(5, 20)
-        union = backend.boolean_union(box, cylinder)
+        _union = backend.boolean_union(box, cylinder)
 
         assert backend.operations_count == initial_count + 3
 

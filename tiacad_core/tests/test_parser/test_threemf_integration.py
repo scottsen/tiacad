@@ -567,7 +567,7 @@ parts: {}
 
         # Parser should reject empty parts
         with pytest.raises(TiaCADParserError) as exc_info:
-            doc = TiaCADParser.parse_file(str(yaml_path))
+            _doc = TiaCADParser.parse_file(str(yaml_path))
 
         assert "parts" in str(exc_info.value).lower()
 

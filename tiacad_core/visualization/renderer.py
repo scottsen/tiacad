@@ -475,7 +475,7 @@ class ModelRenderer:
             try:
                 title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 36)
                 label_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20)
-            except:
+            except Exception:
                 title_font = ImageFont.load_default()
                 label_font = ImageFont.load_default()
 

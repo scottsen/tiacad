@@ -319,12 +319,12 @@ class ColorParser:
 
         h: 0-360 (hue in degrees)
         s: 0-100 (saturation %)
-        l: 0-100 (lightness %)
+        lightness: 0-100 (lightness %)
         a: 0-1 (alpha, optional)
         """
         h = obj['h']
         s = obj['s']
-        l = obj['l']
+        lightness = obj['l']
         a = obj.get('a', 1.0)
 
         # Validate ranges
@@ -332,13 +332,13 @@ class ColorParser:
             raise ColorParseError(f"HSL hue must be 0-360 degrees: {h}", value=obj)
         if not (0 <= s <= 100):
             raise ColorParseError(f"HSL saturation must be 0-100%: {s}", value=obj)
-        if not (0 <= l <= 100):
-            raise ColorParseError(f"HSL lightness must be 0-100%: {l}", value=obj)
+        if not (0 <= lightness <= 100):
+            raise ColorParseError(f"HSL lightness must be 0-100%: {lightness}", value=obj)
         if not (0 <= a <= 1):
             raise ColorParseError(f"HSL alpha must be 0-1: {a}", value=obj)
 
         # Convert HSL to RGB (normalize to 0-1 range)
-        r, g, b = hsl_to_rgb(h / 360, s / 100, l / 100)
+        r, g, b = hsl_to_rgb(h / 360, s / 100, lightness / 100)
         return Color(r, g, b, a)
 
     def _validate_range(self, *values, value_range: Tuple[float, float]):
