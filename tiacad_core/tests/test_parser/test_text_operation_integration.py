@@ -7,7 +7,6 @@ Tests full YAML → Parser → STL pipeline with text operations.
 import pytest
 import tempfile
 import os
-from pathlib import Path
 
 from tiacad_core.parser.tiacad_parser import TiaCADParser
 

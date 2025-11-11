@@ -15,7 +15,6 @@ Version: 0.1.0-alpha
 import logging
 import yaml
 from typing import Dict, Any, Optional
-from pathlib import Path
 
 from ..part import PartRegistry
 from ..utils.exceptions import TiaCADError
@@ -25,7 +24,7 @@ from .parts_builder import PartsBuilder
 from .operations_builder import OperationsBuilder
 from .color_parser import ColorParser
 from .schema_validator import SchemaValidator
-from .yaml_with_lines import parse_yaml_with_lines, LineTracker, format_error
+from .yaml_with_lines import parse_yaml_with_lines, LineTracker
 
 logger = logging.getLogger(__name__)
 

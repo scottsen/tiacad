@@ -149,7 +149,7 @@ class TestSinglePartRendering:
                 assert Path(f).exists()
                 assert Path(f).stat().st_size > 1000
 
-            print(f"\n✓ Rendered colored box:")
+            print("\n✓ Rendered colored box:")
             for f in files:
                 print(f"  - {f}")
 
@@ -199,7 +199,7 @@ class TestSinglePartRendering:
             for f in files:
                 assert Path(f).exists()
 
-            print(f"\n✓ Rendered cylinder from 4 angles:")
+            print("\n✓ Rendered cylinder from 4 angles:")
             for f in files:
                 print(f"  - {Path(f).name}")
 
@@ -335,7 +335,7 @@ class TestAssemblyRendering:
             for f in files:
                 assert Path(f).exists()
 
-            print(f"\n✓ Rendered assembly from 3 angles:")
+            print("\n✓ Rendered assembly from 3 angles:")
             for f in files:
                 print(f"  - {Path(f).name}")
 

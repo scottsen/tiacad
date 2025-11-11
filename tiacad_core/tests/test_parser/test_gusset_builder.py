@@ -15,7 +15,6 @@ Author: TIA (sunny-rainbow-1102)
 
 import pytest
 import cadquery as cq
-import numpy as np
 
 from tiacad_core.part import Part, PartRegistry
 from tiacad_core.parser.parameter_resolver import ParameterResolver

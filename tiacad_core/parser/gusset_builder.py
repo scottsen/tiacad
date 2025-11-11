@@ -13,7 +13,7 @@ Version: 0.1.0-alpha (Phase 1 - Manual Points MVP)
 """
 
 import logging
-from typing import Dict, Any, List, Tuple, Optional
+from typing import Dict, Any, List, Tuple
 import cadquery as cq
 
 from ..part import Part, PartRegistry
@@ -130,7 +130,6 @@ class GussetBuilder:
             )
 
         # Create metadata
-        from .metadata_utils import copy_propagating_metadata
 
         metadata = {
             'operation_type': 'gusset',

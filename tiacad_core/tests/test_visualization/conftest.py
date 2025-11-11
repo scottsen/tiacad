@@ -7,7 +7,6 @@ to prevent test pollution and flakiness.
 
 import pytest
 import gc
-import sys
 
 
 @pytest.fixture(autouse=True)

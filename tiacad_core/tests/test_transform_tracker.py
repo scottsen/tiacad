@@ -14,9 +14,9 @@ Key responsibilities:
 
 import pytest
 import math
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import Mock
 from dataclasses import dataclass
-from typing import List, Dict, Any, Tuple
+from typing import List, Tuple
 
 
 # ============================================================================

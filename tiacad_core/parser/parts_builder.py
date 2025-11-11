@@ -17,7 +17,7 @@ Version: 0.1.0-alpha
 """
 
 import logging
-from typing import Dict, Any, List, Tuple, Optional
+from typing import Dict, Any, Optional
 import cadquery as cq
 
 from ..part import Part, PartRegistry

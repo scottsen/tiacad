@@ -15,7 +15,6 @@ Version: 0.1.0-alpha (Phase 2)
 
 import pytest
 import cadquery as cq
-import math
 
 from tiacad_core.parser.pattern_builder import PatternBuilder, PatternBuilderError
 from tiacad_core.parser.parameter_resolver import ParameterResolver

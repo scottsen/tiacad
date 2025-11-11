@@ -9,7 +9,6 @@ Tests the complete workflow:
 """
 
 import pytest
-import tempfile
 from pathlib import Path
 import zipfile
 
@@ -506,7 +505,7 @@ class TestExistingDemoFiles:
 
     def test_color_demo_export(self, tmp_path):
         """Export color_demo.yaml if it exists"""
-        demo_path = Path("/home/scottsen/src/tia/projects/tiacad/examples/color_demo.yaml")
+        demo_path = Path("/home/scottsen/src/projects/tiacad/examples/color_demo.yaml")
 
         if not demo_path.exists():
             pytest.skip("color_demo.yaml not found")
@@ -531,7 +530,7 @@ class TestExistingDemoFiles:
 
     def test_multi_material_demo_export(self, tmp_path):
         """Export multi_material_demo.yaml if it exists"""
-        demo_path = Path("/home/scottsen/src/tia/projects/tiacad/examples/multi_material_demo.yaml")
+        demo_path = Path("/home/scottsen/src/projects/tiacad/examples/multi_material_demo.yaml")
 
         if not demo_path.exists():
             pytest.skip("multi_material_demo.yaml not found")

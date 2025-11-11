@@ -10,7 +10,7 @@ Supports:
 """
 
 import logging
-from typing import Dict, List, Tuple, Optional, Union
+from typing import List, Tuple, Optional
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont

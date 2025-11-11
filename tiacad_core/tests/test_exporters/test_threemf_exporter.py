@@ -10,9 +10,7 @@ Tests all aspects of 3MF export functionality including:
 """
 
 import pytest
-import tempfile
-from pathlib import Path
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import Mock, patch
 import cadquery as cq
 
 from tiacad_core.exporters.threemf_exporter import (

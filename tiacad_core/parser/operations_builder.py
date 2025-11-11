@@ -24,9 +24,8 @@ Version: 3.0.0-dev (Phase 2 - Parser Integration)
 """
 
 import logging
-from typing import Dict, Any, List, Tuple, Optional
+from typing import Dict, Any, Tuple
 import numpy as np
-import cadquery as cq
 
 from ..part import Part, PartRegistry
 from ..transform_tracker import TransformTracker
@@ -412,7 +411,7 @@ class OperationsBuilder:
         # Validate required fields
         if 'angle' not in params:
             raise OperationsBuilderError(
-                f"Rotate missing required 'angle' field",
+                "Rotate missing required 'angle' field",
                 operation_name=context
             )
 
@@ -460,12 +459,12 @@ class OperationsBuilder:
             # Traditional rotation with explicit axis and origin
             if 'axis' not in params:
                 raise OperationsBuilderError(
-                    f"Rotate missing required 'axis' field (or use 'around' for frame-based rotation)",
+                    "Rotate missing required 'axis' field (or use 'around' for frame-based rotation)",
                     operation_name=context
                 )
             if 'origin' not in params:
                 raise OperationsBuilderError(
-                    f"Rotate missing required 'origin' field (or use 'around' for frame-based rotation)",
+                    "Rotate missing required 'origin' field (or use 'around' for frame-based rotation)",
                     operation_name=context
                 )
 
@@ -502,7 +501,7 @@ class OperationsBuilder:
                     spatial_ref = self.spatial_resolver.resolve(axis)
                     if spatial_ref.orientation is None:
                         raise OperationsBuilderError(
-                            f"Axis reference resolved to a point without orientation",
+                            "Axis reference resolved to a point without orientation",
                             operation_name=context
                         )
                     axis_vector = tuple(spatial_ref.orientation.tolist())
@@ -563,7 +562,7 @@ class OperationsBuilder:
         # Validate required fields
         if 'face' not in params:
             raise OperationsBuilderError(
-                f"align_to_face missing required 'face' field",
+                "align_to_face missing required 'face' field",
                 operation_name=context
             )
 

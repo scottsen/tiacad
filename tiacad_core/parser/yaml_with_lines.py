@@ -26,7 +26,6 @@ Usage:
 
 import yaml
 from typing import Dict, Any, Tuple, Optional, List
-from pathlib import Path
 
 
 class LineTracker:

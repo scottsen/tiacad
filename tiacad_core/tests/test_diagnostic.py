@@ -2,7 +2,6 @@
 Diagnostic test to check for sys.modules pollution.
 """
 import sys
-import pytest
 
 
 def test_cadquery_module_is_real():

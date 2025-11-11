@@ -14,12 +14,9 @@ Version: 0.1.0-alpha (Phase 2)
 """
 
 import logging
-from typing import Dict, Any, List, Tuple
-import cadquery as cq
-import math
+from typing import Dict, Any, List
 
 from ..part import Part, PartRegistry
-from ..transform_tracker import TransformTracker
 from ..utils.exceptions import TiaCADError
 from .parameter_resolver import ParameterResolver
 

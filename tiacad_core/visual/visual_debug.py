@@ -111,7 +111,7 @@ def _export_geometry(geometry, filepath: str):
     if hasattr(geometry, 'center_point'):
         # Mock geometry - write placeholder
         with open(filepath, 'w') as f:
-            f.write(f"# Mock STL for testing\n")
+            f.write("# Mock STL for testing\n")
             f.write(f"# Center: {geometry.center_point}\n")
         return
 
@@ -183,15 +183,15 @@ def compare_geometries(
         ))
         result['center_distance'] = center_diff
 
-        print(f"📊 Comparison:")
+        print("📊 Comparison:")
         print(f"  {name1}: center={geom1.center_point}")
         print(f"  {name2}: center={geom2.center_point}")
         print(f"  Distance: {center_diff:.6f}")
 
-    print(f"\n✅ Exported:")
+    print("\n✅ Exported:")
     print(f"  {file1}")
     print(f"  {file2}")
-    print(f"\n💡 Load both in CAD viewer to compare visually!")
+    print("\n💡 Load both in CAD viewer to compare visually!")
 
     return result
 
@@ -248,14 +248,14 @@ def debug_guitar_hanger_arm():
     print("\n" + "=" * 60)
     print("GUITAR HANGER ARM DEBUG")
     print("=" * 60)
-    print(f"\nExpected behavior:")
+    print("\nExpected behavior:")
     print("  Step 0: Arm at origin")
     print("  Step 1: Arm at beam front (0, 37.5, 0)")
     print("  Step 2: Arm pushed out (0, 72.5, 0)")
     print("  Step 3: Arm tilted UP 10° around attachment point")
-    print(f"\n  → Arm BASE should stay at beam front")
-    print(f"  → Arm TIP should tilt UP and slightly BACK")
-    print(f"\nLoad files in FreeCAD to verify!")
+    print("\n  → Arm BASE should stay at beam front")
+    print("  → Arm TIP should tilt UP and slightly BACK")
+    print("\nLoad files in FreeCAD to verify!")
 
     return files
 

@@ -2,7 +2,6 @@
 Integration tests for color parsing in TiaCAD YAML files
 """
 
-import pytest
 from tiacad_core.parser.tiacad_parser import TiaCADParser
 
 

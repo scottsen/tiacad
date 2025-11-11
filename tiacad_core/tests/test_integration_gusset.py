@@ -10,7 +10,7 @@ import pytest
 import tempfile
 import os
 
-from tiacad_core.parser.tiacad_parser import TiaCADParser, TiaCADParserError
+from tiacad_core.parser.tiacad_parser import TiaCADParser
 
 
 @pytest.fixture

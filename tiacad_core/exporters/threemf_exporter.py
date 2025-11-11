@@ -16,7 +16,6 @@ This exporter leverages TiaCAD's color system to create production-ready
 
 import logging
 from typing import Dict, List, Tuple, Optional
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -279,7 +278,7 @@ class ThreeMFExporter:
         """Add all parts to the build plate"""
         for obj in part_objects:
             # Create build item
-            build_item = model.AddBuildItem(obj, self.wrapper.GetIdentityTransform())
+            model.AddBuildItem(obj, self.wrapper.GetIdentityTransform())
             logger.debug(f"Added '{obj.GetName()}' to build")
 
     def _add_metadata(self, model, metadata: Dict):

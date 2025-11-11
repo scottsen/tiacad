@@ -10,7 +10,6 @@ import math
 from typing import Tuple
 
 from tiacad_core.geometry import (
-    GeometryBackend,
     CadQueryBackend,
     MockBackend,
     MockGeometry,

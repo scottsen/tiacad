@@ -174,6 +174,5 @@ class AssemblyValidator:
     # Helper method for backward compatibility with tests
     def _find_connected_components(self, adjacency: Dict) -> List:
         """Legacy helper - delegates to DisconnectedPartsRule implementation."""
-        from typing import Set
         rule = DisconnectedPartsRule(self.tolerance)
         return rule._find_connected_components(adjacency)

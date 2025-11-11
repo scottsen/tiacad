@@ -268,7 +268,7 @@ class HullBuilder:
 
             # Check if points are coplanar and warn (but try anyway)
             if self._are_points_coplanar(points):
-                logger.warning(f"Input points appear coplanar - hull may fail or produce 2D result")
+                logger.warning("Input points appear coplanar - hull may fail or produce 2D result")
 
             # Compute convex hull (scipy will handle degenerate cases)
             # Note: ConvexHull will raise QhullError if points are truly degenerate

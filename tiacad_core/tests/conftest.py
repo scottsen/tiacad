@@ -29,9 +29,6 @@ from tiacad_core.geometry import (
     GeometryBackend,
     CadQueryBackend,
     MockBackend,
-    get_default_backend,
-    set_default_backend,
-    reset_default_backend,
 )
 
 

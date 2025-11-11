@@ -18,7 +18,7 @@ from typing import Union, Dict, Any, Optional
 import numpy as np
 import logging
 
-from tiacad_core.geometry.spatial_references import SpatialRef, Frame
+from tiacad_core.geometry.spatial_references import SpatialRef
 from tiacad_core.part import PartRegistry
 
 logger = logging.getLogger(__name__)
@@ -546,7 +546,7 @@ class SpatialResolver:
             tangent_length = np.linalg.norm(tangent)
             if tangent_length < 1e-10:
                 raise SpatialResolverError(
-                    f"Edge has zero length, cannot compute tangent"
+                    "Edge has zero length, cannot compute tangent"
                 )
             tangent = tangent / tangent_length
 

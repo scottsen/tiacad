@@ -143,7 +143,7 @@ class SweepBuilder:
                 if not isinstance(path_points, list) or len(path_points) < 2:
                     line, col = self._get_line_info(['operations', name, 'path'])
                     raise SweepBuilderError(
-                        f"Sweep path must be a list of at least 2 points",
+                        "Sweep path must be a list of at least 2 points",
                         operation_name=name,
                         line=line,
                         column=col

@@ -14,7 +14,7 @@ Tests cover:
 import pytest
 import numpy as np
 from numpy.testing import assert_array_almost_equal
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import Mock
 
 from tiacad_core.spatial_resolver import SpatialResolver, SpatialResolverError
 from tiacad_core.geometry.spatial_references import SpatialRef

@@ -179,7 +179,7 @@ def test_performance_comparison():
 
     # MockBackend should be significantly faster
     speedup = cq_time / mock_time
-    print(f"\nPerformance Results:")
+    print("\nPerformance Results:")
     print(f"  MockBackend: {mock_time:.4f}s (100 iterations)")
     print(f"  CadQueryBackend: {cq_time:.4f}s (100 iterations)")
     print(f"  Speedup: {speedup:.1f}x faster")

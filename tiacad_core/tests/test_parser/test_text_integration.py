@@ -10,7 +10,7 @@ Version: 0.1.0-alpha (Phase 3)
 import pytest
 import cadquery as cq
 
-from tiacad_core.sketch import Sketch2D, Text2D
+from tiacad_core.sketch import Text2D
 from tiacad_core.parser.sketch_builder import SketchBuilder
 from tiacad_core.parser.parameter_resolver import ParameterResolver
 

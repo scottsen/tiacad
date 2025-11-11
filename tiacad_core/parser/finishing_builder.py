@@ -15,9 +15,8 @@ Version: 0.1.0-alpha (Phase 2)
 
 import logging
 from typing import Dict, Any, List, Union, Optional
-import cadquery as cq
 
-from ..part import Part, PartRegistry
+from ..part import PartRegistry
 from ..utils.exceptions import TiaCADError
 from .parameter_resolver import ParameterResolver
 

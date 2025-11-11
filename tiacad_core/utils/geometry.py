@@ -5,7 +5,7 @@ Shared functions for working with CadQuery geometry.
 Eliminates code duplication across Part, TransformTracker, and PointResolver.
 """
 
-from typing import Tuple, Dict, Optional
+from typing import Tuple, Dict
 import logging
 
 from .exceptions import InvalidGeometryError

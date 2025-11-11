@@ -7,7 +7,6 @@ Tests end-to-end parsing from YAML to TiaCADDocument.
 import pytest
 import tempfile
 import os
-from pathlib import Path
 
 from tiacad_core.parser.tiacad_parser import (
     TiaCADParser,

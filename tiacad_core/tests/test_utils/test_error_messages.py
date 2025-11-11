@@ -8,7 +8,6 @@ Tests:
 - Path-based error messages
 """
 
-import pytest
 from tiacad_core.utils.exceptions import TiaCADError
 from tiacad_core.utils.yaml_context import (
     get_line_context,

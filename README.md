@@ -40,7 +40,7 @@ tags:
 # Install dependencies
 pip install -r requirements.txt
 
-# Run full test suite (894 tests passing, 2 skipped)
+# Run full test suite (896 tests passing, 100%)
 python3 -m pytest tiacad_core/tests/
 
 # Generate coverage report
@@ -355,7 +355,7 @@ tiacad/
 
 ### Test Coverage
 
-**Overall:** 896 tests, 84% code coverage, 99.8% pass rate (894 passing, 2 skipped)
+**Overall:** 896 tests, 87% code coverage, 100% pass rate (896 passing, 0 skipped)
 
 **By Component:**
 - Selector resolution: 100% coverage ✨
@@ -625,8 +625,8 @@ mypy tiacad_core/ --strict
 | Phase 1: Foundation | ✅ 100% | 6/6 | 131 tests | High | 100% |
 | Phase 2: Operations | ✅ 100% | 5/5 | 139 tests | High | 100% |
 | Phase 3: Sketch Ops | ✅ 100% | 7/7 | 124 tests | High | 100% |
-| **v3.0 Complete** | ✅ Complete | - | 502 tests | 95%+ | 99.8% |
-| **Total** | **✅ Production** | **18/18** | **896 tests** | **84%** | **99.8%** |
+| **v3.0 Complete** | ✅ Complete | - | 502 tests | 95%+ | 100% |
+| **Total** | **✅ Production** | **18/18** | **896 tests** | **87%** | **100%** |
 
 ### Component Breakdown
 
@@ -729,7 +729,7 @@ Built with:
 **Last Updated:** 2025-11-10
 **Session:** astral-gravity-1110 (v3.0 finalization & release)
 **Status:** v3.0 Complete - Production Ready, v3.0.0 Tag Created
-**Tests:** 894/896 passing (99.8% pass rate, 2 skipped)
-**Coverage:** 84% overall (95%+ for spatial reference system)
+**Tests:** 896/896 passing (100% pass rate, 0 skipped)
+**Coverage:** 87% overall (95%+ for spatial reference system)
 **Quality:** Ruff + Pylint validated, comprehensive testing
 **Examples:** 24+ working YAML files → STL/3MF exports

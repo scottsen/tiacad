@@ -14,9 +14,8 @@ Integration with real CadQuery is tested separately.
 
 import pytest
 import math
-from typing import Tuple
 
-from tiacad_core.geometry.mock_backend import MockBackend, MockGeometry, MockFace, MockEdge
+from tiacad_core.geometry.mock_backend import MockBackend, MockFace, MockEdge
 
 
 class TestFaceSelection:

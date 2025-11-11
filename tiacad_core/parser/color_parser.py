@@ -18,8 +18,8 @@ Design: Progressive disclosure
 
 import re
 from typing import Any, Dict, List, Optional, Tuple
-from ..materials_library import get_material_library, Material
-from .color_utils import hsl_to_rgb, hex_to_rgb, rgb_to_hex, clamp
+from ..materials_library import get_material_library
+from .color_utils import hsl_to_rgb, rgb_to_hex, clamp
 
 
 class ColorParseError(Exception):
@@ -295,7 +295,7 @@ class ColorParser:
 
         else:
             raise ColorParseError(
-                f"Invalid color object. Expected 'r,g,b' or 'h,s,l' keys.",
+                "Invalid color object. Expected 'r,g,b' or 'h,s,l' keys.",
                 value=obj,
                 suggestions=["{r: 255, g: 0, b: 0}", "{h: 0, s: 100, l: 50}"]
             )

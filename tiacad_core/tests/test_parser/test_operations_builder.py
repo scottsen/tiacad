@@ -6,13 +6,10 @@ TransformTracker and PointResolver.
 """
 
 import pytest
-import cadquery as cq
-import math
 
 from tiacad_core.parser.operations_builder import OperationsBuilder, OperationsBuilderError
 from tiacad_core.parser.parameter_resolver import ParameterResolver
 from tiacad_core.parser.parts_builder import PartsBuilder
-from tiacad_core.part import Part, PartRegistry
 
 
 class TestTranslateOperations:

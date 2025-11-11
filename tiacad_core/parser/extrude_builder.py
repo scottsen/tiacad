@@ -13,7 +13,7 @@ from typing import Dict, Any, Optional, List, Tuple, TYPE_CHECKING
 import cadquery as cq
 
 from ..part import Part, PartRegistry
-from ..sketch import Sketch2D, SketchError
+from ..sketch import Sketch2D
 from ..utils.exceptions import TiaCADError
 from .parameter_resolver import ParameterResolver
 
@@ -256,7 +256,6 @@ class ExtrudeBuilder:
                 )
 
             # Separate shapes by operation
-            from ..sketch import Shape2D
             add_shapes = [s for s in sketch.shapes if s.operation == 'add']
             subtract_shapes = [s for s in sketch.shapes if s.operation == 'subtract']
 

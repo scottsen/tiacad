@@ -9,7 +9,7 @@ import cadquery as cq
 
 from tiacad_core.parser.parts_builder import PartsBuilder, PartsBuilderError
 from tiacad_core.parser.parameter_resolver import ParameterResolver
-from tiacad_core.part import Part, PartRegistry
+from tiacad_core.part import Part
 
 
 class TestBox:
