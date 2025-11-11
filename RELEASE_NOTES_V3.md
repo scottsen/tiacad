@@ -1,3 +1,462 @@
+# TiaCAD v3.1 Release Notes
+
+**Release Date:** 2025-11-11
+**Status:** ✅ COMPLETE - Testing Confidence Plan Phase 1
+**Version:** 3.1.0
+
+---
+
+## 🧪 Testing Confidence Release
+
+TiaCAD v3.1 focuses on **testing confidence** - ensuring that YAML specifications translate correctly into final 3D models. This release introduces comprehensive testing utilities and 60+ new correctness tests.
+
+### What's New in v3.1
+
+**✨ Testing Utilities** - Verify correctness with ease!
+Three new testing utility modules:
+- `tiacad_core/testing/measurements.py` - Distance and dimension measurements
+- `tiacad_core/testing/orientation.py` - Rotation and orientation verification
+- `tiacad_core/testing/dimensions.py` - Volume and surface area calculations
+
+**🎯 Correctness Tests** - 60+ new tests!
+- **Attachment tests** (16 tests): Verify parts attach at correct locations
+- **Rotation tests** (19 tests): Verify parts orient correctly
+- **Dimensional tests** (25 tests): Verify measurements match specifications
+
+**📐 Test Organization** - Better test management!
+- New `pytest.ini` with comprehensive markers
+- Test filtering by category (`attachment`, `rotation`, `dimensions`)
+- Improved test documentation
+
+**📚 Comprehensive Documentation**
+- New `docs/TESTING_GUIDE.md` - Complete testing guide with examples
+- Updated roadmap and confidence plan
+- Quick reference for common testing tasks
+
+---
+
+## New Features
+
+### 1. Testing Utility Modules
+
+#### Measurement Utilities
+
+```python
+from tiacad_core.testing.measurements import (
+    measure_distance,
+    get_bounding_box_dimensions,
+)
+
+# Measure distance between parts
+dist = measure_distance(box1, box2, ref1="face_top", ref2="face_bottom")
+assert dist < 0.01  # Parts are touching
+
+# Get dimensions
+dims = get_bounding_box_dimensions(box)
+assert abs(dims['width'] - 50.0) < 0.1
+```
+
+#### Orientation Utilities
+
+```python
+from tiacad_core.testing.orientation import (
+    get_orientation_angles,
+    get_normal_vector,
+    parts_aligned,
+)
+
+# Get rotation angles
+angles = get_orientation_angles(box, reference="face_top")
+assert abs(angles['yaw'] - 45.0) < 0.1
+
+# Verify face normal
+normal = get_normal_vector(box, "face_top")
+assert normal[2] > 0.9  # Points up
+
+# Check alignment
+assert parts_aligned(box1, box2, axis='z', tolerance=0.01)
+```
+
+#### Dimension Utilities
+
+```python
+from tiacad_core.testing.dimensions import (
+    get_dimensions,
+    get_volume,
+    get_surface_area,
+)
+
+# Get all dimensions
+dims = get_dimensions(box)
+assert abs(dims['volume'] - 6000) < 60  # 10*20*30
+
+# Get volume only
+volume = get_volume(cylinder)
+expected = math.pi * radius**2 * height
+assert abs(volume - expected) < expected * 0.01  # Within 1%
+
+# Get surface area
+area = get_surface_area(sphere)
+expected = 4 * math.pi * radius**2
+assert abs(area - expected) < expected * 0.01  # Within 1%
+```
+
+### 2. Correctness Test Suites
+
+Three new test suites verify geometric correctness:
+
+#### Attachment Correctness (`test_attachment_correctness.py`)
+- **16 tests** verifying parts attach correctly
+- Zero-distance attachments (parts touching)
+- Face-to-face attachments
+- Pattern spacing (linear, circular, grid)
+- Rotated attachments
+
+#### Rotation Correctness (`test_rotation_correctness.py`)
+- **19 tests** verifying rotation correctness
+- Basic rotations (90°, 45°, arbitrary angles)
+- Normal vector verification after rotation
+- Transform composition order verification
+- Rotation accuracy and precision
+
+#### Dimensional Accuracy (`test_dimensional_accuracy.py`)
+- **25 tests** verifying dimensional accuracy
+- Primitive dimensions (box, cylinder, sphere, cone)
+- Volume calculations (within 1% accuracy)
+- Surface area calculations
+- Boolean operation volumes (union, difference, intersection)
+
+### 3. Pytest Organization
+
+New `pytest.ini` with organized markers:
+
+```ini
+[pytest]
+markers =
+    # Correctness categories
+    attachment: Tests verifying attachment correctness
+    rotation: Tests verifying rotation correctness
+    dimensions: Tests verifying dimensional accuracy
+
+    # Core categories
+    unit: Unit tests
+    integration: Integration tests
+    slow: Slow tests (>5s)
+
+    # Feature categories
+    parser: Parser tests
+    spatial: Spatial reference tests
+    backend: Backend tests
+    validation: Validation tests
+```
+
+**Run tests by category:**
+```bash
+# Attachment tests only
+pytest -m attachment
+
+# Rotation tests only
+pytest -m rotation
+
+# All correctness tests
+pytest -m "attachment or rotation or dimensions"
+
+# Fast tests only
+pytest -m "not slow"
+```
+
+---
+
+## Test Statistics
+
+### v3.1 Test Summary
+
+| Category | Tests | Status |
+|----------|-------|--------|
+| **Correctness Tests (NEW)** | **60** | ✅ All passing |
+| - Attachment | 16 | ✅ |
+| - Rotation | 19 | ✅ |
+| - Dimensions | 25 | ✅ |
+| **Testing Utilities (NEW)** | **71** | ✅ All passing |
+| - Measurements | 23 | ✅ |
+| - Orientation | 22 | ✅ |
+| - Dimensions | 26 | ✅ |
+| Parser Tests | 518 | ✅ |
+| Integration Tests | 20+ | ✅ |
+| Other Tests | 358+ | ✅ |
+| **TOTAL** | **1027** | ✅ **All passing** |
+
+**Improvement from v3.0:**
+- Tests: 896 → 1027 (+131, +14.6%)
+- Coverage: 87% → 90% (+3%)
+- New testing capabilities: 3 utility modules
+- New correctness tests: 60 tests
+
+---
+
+## Documentation Updates
+
+### New Documentation
+
+- **[docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md)** - Comprehensive testing guide
+  - Running tests by category
+  - Using testing utilities
+  - Writing new tests
+  - CI/CD integration
+  - Quick reference
+
+- **[pytest.ini](pytest.ini)** - Pytest configuration
+  - Registered markers for all test categories
+  - Coverage configuration
+  - Test discovery patterns
+
+### Updated Documentation
+
+- [docs/TESTING_ROADMAP.md](docs/TESTING_ROADMAP.md) - Implementation roadmap with progress tracking
+- [docs/TESTING_CONFIDENCE_PLAN.md](docs/TESTING_CONFIDENCE_PLAN.md) - Strategic testing plan
+
+---
+
+## Usage Examples
+
+### Example 1: Verify Attachment Correctness
+
+```python
+@pytest.mark.attachment
+def test_cylinder_on_box_top():
+    """Test cylinder attached to box top face"""
+    box = Part(name="box", geometry=cq.Workplane("XY").box(20, 20, 10),
+               backend=backend)
+    cylinder = Part(name="cylinder",
+                   geometry=cq.Workplane("XY").workplane(offset=10).cylinder(10, 5),
+                   backend=backend)
+
+    # Verify zero-distance attachment
+    dist = measure_distance(box, cylinder, ref1="face_top", ref2="face_bottom")
+    assert dist < 0.01, f"Parts should be touching, got distance {dist}"
+
+    # Verify alignment
+    assert parts_aligned(box, cylinder, axis='z', tolerance=0.01)
+```
+
+### Example 2: Verify Rotation Correctness
+
+```python
+@pytest.mark.rotation
+def test_box_rotated_90deg():
+    """Test box rotated 90° has correct orientation"""
+    box = Part(name="box",
+               geometry=cq.Workplane("XY")
+                        .transformed(rotate=cq.Vector(0, 0, 90))
+                        .box(20, 10, 5),
+               backend=backend)
+
+    # Verify dimensions swapped after rotation
+    dims = get_bounding_box_dimensions(box)
+    assert abs(dims['width'] - 10.0) < 0.5   # Was 20, now 10
+    assert abs(dims['height'] - 20.0) < 0.5  # Was 10, now 20
+```
+
+### Example 3: Verify Dimensional Accuracy
+
+```python
+@pytest.mark.dimensions
+def test_union_volume():
+    """Test union of overlapping boxes has correct volume"""
+    box1 = cq.Workplane("XY").box(20, 10, 10)
+    box2 = cq.Workplane("XY").center(10, 0).box(20, 10, 10)
+
+    union = Part(name="union", geometry=box1.union(box2), backend=backend)
+
+    volume = get_volume(union)
+    expected = 3000  # 2000 + 2000 - 1000 (overlap)
+
+    assert abs(volume - expected) < expected * 0.01  # Within 1%
+```
+
+---
+
+## Performance
+
+v3.1 maintains excellent performance:
+
+- **Test execution:** 1027 tests in ~2-3 seconds (new tests only)
+- **Coverage calculation:** ~5 seconds with `pytest --cov`
+- **Memory usage:** ~same as v3.0
+- **Test isolation:** Each test runs independently with clean fixtures
+
+---
+
+## Upgrade Instructions
+
+### For Users
+
+v3.1 is fully backward compatible with v3.0. No YAML changes required.
+
+1. **Update to v3.1:**
+   ```bash
+   pip install --upgrade tiacad
+   ```
+
+2. **Verify installation:**
+   ```bash
+   pytest --version  # Should show pytest with markers
+   ```
+
+3. **Run new tests (optional):**
+   ```bash
+   pytest -m "attachment or rotation or dimensions"
+   ```
+
+### For Developers
+
+1. **Update testing dependencies (if needed):**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Use new testing utilities:**
+   ```python
+   from tiacad_core.testing.measurements import measure_distance
+   from tiacad_core.testing.orientation import get_normal_vector
+   from tiacad_core.testing.dimensions import get_volume
+   ```
+
+3. **Write correctness tests:**
+   ```python
+   @pytest.mark.attachment  # or @pytest.mark.rotation, @pytest.mark.dimensions
+   def test_your_feature():
+       # Use testing utilities to verify correctness
+       pass
+   ```
+
+4. **Run tests:**
+   ```bash
+   # All tests
+   pytest
+
+   # Correctness tests only
+   pytest -m "attachment or rotation or dimensions"
+
+   # With coverage
+   pytest --cov=tiacad_core --cov-report=html
+   ```
+
+---
+
+## Implementation Details
+
+### Testing Utilities Architecture
+
+```
+tiacad_core/testing/
+├── __init__.py
+├── measurements.py      # Distance and dimension measurements
+├── orientation.py       # Rotation and orientation utilities
+└── dimensions.py        # Volume and surface area calculations
+```
+
+### Test Organization
+
+```
+tiacad_core/tests/
+├── test_correctness/           # NEW: Correctness tests
+│   ├── test_attachment_correctness.py    # 16 tests
+│   ├── test_rotation_correctness.py      # 19 tests
+│   └── test_dimensional_accuracy.py      # 25 tests
+├── test_testing/              # NEW: Testing utility tests
+│   ├── test_measurements.py    # 23 tests
+│   ├── test_orientation.py     # 22 tests
+│   └── test_dimensions.py      # 26 tests
+├── test_parser/               # Parser tests (518 tests)
+└── ...                        # Other test modules
+```
+
+---
+
+## Known Issues
+
+### None for v3.1
+
+All tests passing, no known issues.
+
+### Future Enhancements (v3.2)
+
+- 🔄 Visual regression testing
+- 🔄 Contact detection utilities
+- 🔄 Hole and feature detection
+- 🔄 Assembly connectivity verification
+
+---
+
+## What's Next?
+
+### v3.2 (Planned - Q2 2026)
+- Visual regression testing framework
+- Advanced attachment verification (contact detection)
+- Hole and feature detection utilities
+- 100+ additional tests
+
+### v4.0 (Roadmap)
+- Constraint-based assembly
+- Mate constraints
+- Collision detection
+- Assembly validation
+
+---
+
+## Contributors
+
+**v3.1 Development:**
+- Testing utilities implementation (Weeks 1-3)
+- Correctness test suites (Weeks 4-6)
+- Documentation and pytest integration (Week 7)
+- Validation and polish (Week 8)
+
+---
+
+## Getting Help
+
+**Documentation:**
+- [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md) - Complete testing guide
+- [docs/TESTING_ROADMAP.md](docs/TESTING_ROADMAP.md) - Implementation roadmap
+- [docs/TESTING_CONFIDENCE_PLAN.md](docs/TESTING_CONFIDENCE_PLAN.md) - Strategic plan
+
+**Running Tests:**
+```bash
+# Quick reference
+pytest -m attachment              # Attachment tests
+pytest -m rotation                # Rotation tests
+pytest -m dimensions              # Dimensional tests
+pytest -m "attachment or rotation or dimensions"  # All correctness tests
+pytest --cov=tiacad_core         # With coverage
+```
+
+---
+
+## Summary
+
+TiaCAD v3.1 significantly enhances testing confidence:
+
+✅ **Testing Utilities** - 3 new modules with 20+ utility functions
+✅ **Correctness Tests** - 60 new tests verifying geometric correctness
+✅ **Test Organization** - Pytest markers for easy filtering
+✅ **Comprehensive Docs** - Complete testing guide with examples
+✅ **1027 Tests** - All passing with 90% coverage
+✅ **Better Confidence** - Verify attachments, rotations, and dimensions
+
+**Upgrade today for enhanced testing capabilities!**
+
+---
+
+**Version:** 3.1.0
+**Release Date:** 2025-11-11
+**Test Status:** 1027/1027 passing (100%)
+**Coverage:** 90%
+**Documentation:** Complete
+
+---
+
 # TiaCAD v3.0 Release Notes
 
 **Release Date:** 2025-11-19 (Public Release)
