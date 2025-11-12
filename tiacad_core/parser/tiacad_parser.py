@@ -150,9 +150,9 @@ class TiaCADDocument:
                 f"Failed to export part '{part_name}' to STEP: {str(e)}"
             ) from e
 
-    def export_3mf(self, output_path: str):
+    def export_3mf(self, output_path: str, part_name: Optional[str] = None):
         """
-        Export all parts to 3MF file with multi-material support.
+        Export parts to 3MF file with multi-material support.
 
         3MF is the modern standard for 3D printing, supporting:
         - Multi-color/multi-material parts
@@ -165,20 +165,32 @@ class TiaCADDocument:
 
         Args:
             output_path: Path to output .3mf file
+            part_name: Part to export (if None, exports all parts)
 
         Raises:
             TiaCADParserError: If export fails
 
         Example:
             >>> doc = TiaCADParser.parse_file("multi_material.yaml")
-            >>> doc.export_3mf("output.3mf")
+            >>> doc.export_3mf("output.3mf")  # Export all parts
+            >>> doc.export_3mf("output.3mf", "final_part")  # Export single part
             # Open in PrusaSlicer/BambuStudio with materials auto-assigned!
         """
         try:
             from ..exporters import export_3mf
+            from ..geometry.part_registry import PartRegistry
 
-            # Export all parts with materials
-            export_3mf(self.parts, output_path, self.metadata)
+            # Determine which parts to export
+            if part_name is not None:
+                # Export single specified part
+                temp_registry = PartRegistry()
+                part = self.parts.get(part_name)
+                temp_registry.add(part_name, part.geometry)
+                export_3mf(temp_registry, output_path, self.metadata)
+                logger.info(f"Exported part '{part_name}' to {output_path}")
+            else:
+                # Export all parts with materials
+                export_3mf(self.parts, output_path, self.metadata)
 
             logger.info(
                 f"Exported {len(self.parts.list_parts())} parts to {output_path} (3MF)"

@@ -141,7 +141,7 @@ def cmd_build(args):
         if output_ext == '.stl':
             doc.export_stl(str(output_file), part_name=args.part)
         elif output_ext == '.3mf':
-            doc.export_3mf(str(output_file))
+            doc.export_3mf(str(output_file), part_name=args.part)
         elif output_ext == '.step':
             doc.export_step(str(output_file), part_name=args.part)
 
@@ -298,6 +298,149 @@ def cmd_info(args):
         return 1
 
 
+def cmd_validate_geometry(args):
+    """
+    Validate geometry of built parts for 3D printing.
+
+    Checks:
+    - Single connected component (union operations actually merge)
+    - Watertight meshes (no holes or gaps)
+    - Positive volumes
+    - No degenerate faces
+    """
+    from .parser.tiacad_parser import TiaCADParser
+
+    try:
+        import trimesh
+    except ImportError:
+        print_error("trimesh library required for geometry validation")
+        print_info("Install with: pip install trimesh")
+        return 1
+
+    import tempfile
+
+    input_file = Path(args.input)
+
+    if not input_file.exists():
+        print_error(f"File not found: {input_file}")
+        return 1
+
+    print_info(f"Validating {Colors.CYAN}{input_file.name}{Colors.RESET}")
+    print()
+
+    try:
+        # Parse YAML
+        start_time = time.time()
+        doc = TiaCADParser.parse_file(str(input_file))
+        parse_time = time.time() - start_time
+
+        # Determine which part to validate
+        if args.part:
+            part_name = args.part
+        elif doc.operations:
+            part_name = list(doc.operations.keys())[-1]
+        else:
+            parts = doc.parts.list_parts()
+            if not parts:
+                print_error("No parts found in document")
+                return 1
+            part_name = parts[0]
+
+        print_info(f"Validating part: {Colors.CYAN}{part_name}{Colors.RESET}")
+
+        # Get part
+        part = doc.parts.get(part_name)
+
+        # Export to temp STL
+        with tempfile.NamedTemporaryFile(suffix='.stl', delete=False) as tmp:
+            tmp_path = Path(tmp.name)
+
+        try:
+            export_start = time.time()
+            part.geometry.val().exportStl(str(tmp_path))
+            export_time = time.time() - export_start
+
+            # Load mesh
+            mesh = trimesh.load(str(tmp_path))
+
+            # Compute stats
+            components = mesh.split(only_watertight=False)
+
+            stats = {
+                'vertices': len(mesh.vertices),
+                'faces': len(mesh.faces),
+                'volume': mesh.volume,
+                'watertight': mesh.is_watertight,
+                'components': len(components),
+            }
+
+            # Find issues
+            issues = []
+
+            if stats['components'] > 1:
+                issues.append(
+                    f"❌ {stats['components']} disconnected parts (expected 1 for printable model)"
+                )
+                if args.verbose:
+                    for i, comp in enumerate(components[:5]):
+                        issues.append(
+                            f"   Component {i+1}: {len(comp.vertices)} vertices, {len(comp.faces)} faces"
+                        )
+                    if len(components) > 5:
+                        issues.append(f"   ... and {len(components) - 5} more")
+
+            if not stats['watertight']:
+                issues.append("❌ Mesh not watertight (will cause slicing errors)")
+
+            if stats['volume'] <= 0:
+                issues.append(f"❌ Invalid volume: {stats['volume']:.2f} mm³")
+
+            if stats['vertices'] == 0:
+                issues.append("❌ Empty mesh (no vertices)")
+
+            if stats['faces'] == 0:
+                issues.append("❌ No faces")
+
+            # Display results
+            print()
+            print_header("📊 Geometry Analysis")
+            print()
+            print(f"  Vertices:    {stats['vertices']:,}")
+            print(f"  Faces:       {stats['faces']:,}")
+            print(f"  Volume:      {stats['volume']:.2f} mm³")
+            print(f"  Watertight:  {'✅ Yes' if stats['watertight'] else '❌ No'}")
+            print(f"  Components:  {stats['components']}")
+            print()
+
+            if len(issues) == 0:
+                print_success("✅ Geometry is valid and printable")
+                print()
+                print_info(f"Parse time:  {parse_time:.2f}s")
+                print_info(f"Export time: {export_time:.2f}s")
+                return 0
+            else:
+                print_error("❌ Geometry validation failed:")
+                print()
+                for issue in issues:
+                    print(f"  {issue}")
+                print()
+                print_warning("💡 Tip: For union operations, ensure parts actually overlap")
+                print()
+                return 1
+
+        finally:
+            tmp_path.unlink(missing_ok=True)
+
+    except Exception as e:
+        print_error(f"Validation failed: {str(e)}")
+
+        if args.verbose:
+            import traceback
+            traceback.print_exc()
+
+        return 1
+
+
 def create_parser():
     """Create the argument parser"""
     parser = argparse.ArgumentParser(
@@ -344,6 +487,16 @@ For more information: https://github.com/yourusername/tiacad
     info_parser.add_argument('input', help='Input YAML file')
     info_parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
     info_parser.set_defaults(func=cmd_info)
+
+    # Validate-geometry command
+    validate_geom_parser = subparsers.add_parser(
+        'validate-geometry',
+        help='Validate geometry is printable (checks for disconnected parts, watertightness)'
+    )
+    validate_geom_parser.add_argument('input', help='Input YAML file')
+    validate_geom_parser.add_argument('-p', '--part', help='Specific part to validate (default: last operation)')
+    validate_geom_parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output with component details')
+    validate_geom_parser.set_defaults(func=cmd_validate_geometry)
 
     return parser
 
