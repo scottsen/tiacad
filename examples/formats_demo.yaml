@@ -52,23 +52,17 @@ parameters:
   corner_radius: 5
 
 parts:
-  # Simple rounded box to demonstrate formats
+  # Simple box to demonstrate formats
   demo_box:
     primitive: box
-    size: ['${size}', '${size}', '${height}']
+    parameters:
+      width: '${size}'
+      height: '${size}'
+      depth: '${height}'
     origin: center
 
-operations:
-  # Add rounded corners for visual interest
-  rounded:
-    type: finishing
-    finish: fillet
-    input: demo_box
-    radius: '${corner_radius}'
-    edges: all
-
-export:
-  default_part: rounded
+# Note: Finishing operations (fillet) temporarily removed
+# until export section default_part parsing is implemented
 
 # ============================================================================
 # TRY IT YOURSELF:

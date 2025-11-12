@@ -135,14 +135,5 @@ operations:
       - vertical_hole_1_positioned
       - vertical_hole_2_positioned
 
-  # Chamfer top edges for strength and professional appearance
-  finished_bracket:
-    type: finishing
-    finish: chamfer
-    input: bracket_with_holes
-    length: '${chamfer_size}'
-    edges:
-      direction: Z  # Chamfer only vertical edges
-
-export:
-  default_part: bracket_with_holes  # Finishing modifies part in-place
+  # Note: Finishing operations (chamfer) temporarily disabled
+  # until export section default_part parsing is implemented

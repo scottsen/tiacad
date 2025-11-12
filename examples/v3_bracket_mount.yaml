@@ -131,20 +131,8 @@ operations:
       - left_arm
       - right_arm
 
-  # Apply finishing to smooth edges
-  finished_assembly:
-    type: finishing
-    finish: fillet
-    input: final_assembly
-    radius: 2.0
-    edges: all
-
-export:
-  default_part: finished_assembly
-  parts:
-    - name: finished_assembly
-      description: Complete bracket mount assembly with mounting holes and filleted edges
-      filename: bracket_mount_assembly.stl
+  # Note: Finishing operations (fillet) temporarily disabled
+  # until export section default_part parsing is implemented
 
 # v3.0 Features Demonstrated:
 # ========================
