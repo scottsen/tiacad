@@ -1,0 +1,414 @@
+metadata:
+  name: Awesome Guitar Hanger v3.1
+  description: |
+    Professional wall-mounted guitar hanger with structural reinforcements.
+    Demonstrates TiaCAD v3.0 auto-references and complete assembly workflow.
+    Ready to 3D print as a single unified part!
+  version: 3.1
+  author: TIA
+  created: 2025-11-11
+  features:
+    - Auto-references (beam.face_front, plate.face_top, etc.)
+    - Boolean unions for complete assembly
+    - Structural reinforcement brackets
+    - Screw holes with countersink
+    - Optimized for 3D printing
+
+parameters:
+  # Mounting plate dimensions - beefed up for strength!
+  plate_width: 120
+  plate_thickness: 15  # Thicker = stronger
+  plate_height: 90
+
+  # Horizontal beam - strong and stable
+  beam_width: 90
+  beam_thickness: 20  # Extra thick for rigidity
+  beam_depth: 12
+
+  # Guitar cradle arms - wider for better support
+  arm_width: 40  # Wider = more contact area
+  arm_length: 80  # Long enough to support neck
+  arm_thickness: 12
+  arm_spacing: 75  # Standard guitar neck width
+  arm_tilt_angle: 12  # Slight upward angle
+
+  # Reinforcement brackets - the secret sauce!
+  bracket_width: 30
+  bracket_height: 25
+  bracket_thickness: 12
+
+  # Screw mounting specifications
+  screw_diameter: 5.0  # For #10 wood screws
+  screw_head_diameter: 10.0  # Countersink
+  countersink_depth: 3
+  screw_spacing: 70
+  screw_offset_from_top: 20
+
+  # Grip pads on arms (optional cylinders for texture)
+  grip_radius: 3
+  grip_spacing: 15
+
+parts:
+  # ═══════════════════════════════════════════════════════
+  # MAIN STRUCTURAL COMPONENTS
+  # ═══════════════════════════════════════════════════════
+
+  mounting_plate:
+    primitive: box
+    parameters:
+      width: '${plate_width}'
+      height: '${plate_thickness}'
+      depth: '${plate_height}'
+    origin: center
+    color: [0.2, 0.3, 0.5, 1.0]  # Nice blue
+
+  support_beam:
+    primitive: box
+    parameters:
+      width: '${beam_width}'
+      height: '${beam_thickness}'
+      depth: '${beam_depth}'
+    origin: center
+    color: [0.2, 0.3, 0.5, 1.0]
+
+  cradle_arm:
+    primitive: box
+    parameters:
+      width: '${arm_width}'
+      height: '${arm_length}'
+      depth: '${arm_thickness}'
+    origin: center
+    color: [0.2, 0.3, 0.5, 1.0]
+
+  # ═══════════════════════════════════════════════════════
+  # REINFORCEMENT BRACKETS - Makes it STRONG!
+  # ═══════════════════════════════════════════════════════
+
+  reinforcement_bracket:
+    primitive: box
+    parameters:
+      width: '${bracket_width}'
+      height: '${bracket_height}'
+      depth: '${bracket_thickness}'
+    origin: center
+    color: [0.2, 0.3, 0.5, 1.0]
+
+  # ═══════════════════════════════════════════════════════
+  # MOUNTING HARDWARE
+  # ═══════════════════════════════════════════════════════
+
+  screw_hole_shaft:
+    primitive: cylinder
+    parameters:
+      radius: '${screw_diameter / 2}'
+      height: '${plate_thickness + 2}'  # Through-hole
+    origin: center
+
+  screw_countersink:
+    primitive: cylinder
+    parameters:
+      radius: '${screw_head_diameter / 2}'
+      height: '${countersink_depth + 1}'
+    origin: center
+
+  # ═══════════════════════════════════════════════════════
+  # GRIP TEXTURE ELEMENTS (decorative)
+  # ═══════════════════════════════════════════════════════
+
+  grip_pad:
+    primitive: cylinder
+    parameters:
+      radius: '${grip_radius}'
+      height: '${arm_thickness + 2}'
+    origin: center
+
+# ═══════════════════════════════════════════════════════
+# SPATIAL REFERENCES - Using auto-references as foundation!
+# ═══════════════════════════════════════════════════════
+# These reference points are derived from auto-references
+
+references:
+  # Beam attachment point (front of plate)
+  beam_attach_point:
+    type: point
+    from: mounting_plate.face_front  # 🎯 Auto-reference!
+    offset: [0, 0, 0]
+
+  # Front of beam (where arms attach)
+  beam_front_center:
+    type: point
+    from: mounting_plate.face_front  # 🎯 Auto-reference!
+    offset: [0, '${beam_thickness}', 0]
+
+  # Left arm attachment point
+  left_arm_attach:
+    type: point
+    from: beam_front_center
+    offset: ['${-arm_spacing / 2}', 0, 0]
+
+  # Right arm attachment point
+  right_arm_attach:
+    type: point
+    from: beam_front_center
+    offset: ['${arm_spacing / 2}', 0, 0]
+
+  # Left arm starting position (offset for length)
+  left_arm_start:
+    type: point
+    from: left_arm_attach
+    offset: [0, '${arm_length / 2}', 0]
+
+  # Right arm starting position
+  right_arm_start:
+    type: point
+    from: right_arm_attach
+    offset: [0, '${arm_length / 2}', 0]
+
+  # Bracket positions
+  left_bracket_pos:
+    type: point
+    from: mounting_plate.face_front  # 🎯 Auto-reference!
+    offset: ['${-beam_width / 3}', '${bracket_height / 2}', 0]
+
+  right_bracket_pos:
+    type: point
+    from: mounting_plate.face_front  # 🎯 Auto-reference!
+    offset: ['${beam_width / 3}', '${bracket_height / 2}', 0]
+
+  # Screw hole positions
+  left_screw_pos:
+    type: point
+    from: mounting_plate.center  # 🎯 Auto-reference!
+    offset: ['${-screw_spacing / 2}', 0, '${plate_height/2 - screw_offset_from_top}']
+
+  right_screw_pos:
+    type: point
+    from: mounting_plate.center  # 🎯 Auto-reference!
+    offset: ['${screw_spacing / 2}', 0, '${plate_height/2 - screw_offset_from_top}']
+
+  # Countersink positions (front face)
+  left_countersink_pos:
+    type: point
+    from: mounting_plate.face_front  # 🎯 Auto-reference!
+    offset: ['${-screw_spacing / 2}', '${-countersink_depth / 2}', '${plate_height/2 - screw_offset_from_top}']
+
+  right_countersink_pos:
+    type: point
+    from: mounting_plate.face_front  # 🎯 Auto-reference!
+    offset: ['${screw_spacing / 2}', '${-countersink_depth / 2}', '${plate_height/2 - screw_offset_from_top}']
+
+operations:
+  # ═══════════════════════════════════════════════════════
+  # STEP 1: POSITION THE BEAM ON THE PLATE
+  # ═══════════════════════════════════════════════════════
+
+  beam_positioned:
+    type: transform
+    input: support_beam
+    transforms:
+      - translate:
+          to: beam_attach_point  # Named reference from auto-reference!
+
+  # ═══════════════════════════════════════════════════════
+  # STEP 2: POSITION THE CRADLE ARMS
+  # ═══════════════════════════════════════════════════════
+
+  left_arm_positioned:
+    type: transform
+    input: cradle_arm
+    transforms:
+      # First: Move to left arm starting position
+      - translate:
+          to: left_arm_start  # Named reference!
+      # Then: Tilt upward around attachment point
+      - rotate:
+          angle: '${arm_tilt_angle}'
+          axis: X
+          origin: left_arm_attach  # Named reference!
+
+  right_arm_positioned:
+    type: transform
+    input: cradle_arm
+    transforms:
+      - translate:
+          to: right_arm_start  # Named reference!
+      - rotate:
+          angle: '${arm_tilt_angle}'
+          axis: X
+          origin: right_arm_attach  # Named reference!
+
+  # ═══════════════════════════════════════════════════════
+  # STEP 3: ADD REINFORCEMENT BRACKETS
+  # ═══════════════════════════════════════════════════════
+  # These connect the beam to the plate for extra strength
+
+  left_bracket_positioned:
+    type: transform
+    input: reinforcement_bracket
+    transforms:
+      - translate: left_bracket_pos  # Named reference!
+
+  right_bracket_positioned:
+    type: transform
+    input: reinforcement_bracket
+    transforms:
+      - translate: right_bracket_pos  # Named reference!
+
+  # ═══════════════════════════════════════════════════════
+  # STEP 4: CREATE SCREW HOLES WITH COUNTERSINK
+  # ═══════════════════════════════════════════════════════
+
+  # Left screw shaft
+  left_screw_shaft:
+    type: transform
+    input: screw_hole_shaft
+    transforms:
+      - translate: left_screw_pos  # Named reference!
+
+  # Left screw countersink (front side)
+  left_countersink:
+    type: transform
+    input: screw_countersink
+    transforms:
+      - translate: left_countersink_pos  # Named reference!
+
+  # Right screw shaft
+  right_screw_shaft:
+    type: transform
+    input: screw_hole_shaft
+    transforms:
+      - translate: right_screw_pos  # Named reference!
+
+  # Right screw countersink (front side)
+  right_countersink:
+    type: transform
+    input: screw_countersink
+    transforms:
+      - translate: right_countersink_pos  # Named reference!
+
+  # Combine screw holes
+  left_screw_complete:
+    type: boolean
+    operation: union
+    inputs:
+      - left_screw_shaft
+      - left_countersink
+
+  right_screw_complete:
+    type: boolean
+    operation: union
+    inputs:
+      - right_screw_shaft
+      - right_countersink
+
+  # ═══════════════════════════════════════════════════════
+  # STEP 5: ADD GRIP TEXTURE TO ARMS (Optional detail)
+  # ═══════════════════════════════════════════════════════
+
+  left_grip_1:
+    type: transform
+    input: grip_pad
+    transforms:
+      - rotate:
+          angle: 90
+          axis: X
+          origin: [0, 0, 0]
+      - translate:
+          to:
+            from: left_arm_start
+            offset: [0, '${grip_spacing}', 0]
+
+  left_grip_2:
+    type: transform
+    input: grip_pad
+    transforms:
+      - rotate:
+          angle: 90
+          axis: X
+          origin: [0, 0, 0]
+      - translate:
+          to:
+            from: left_arm_start
+            offset: [0, '${-grip_spacing}', 0]
+
+  right_grip_1:
+    type: transform
+    input: grip_pad
+    transforms:
+      - rotate:
+          angle: 90
+          axis: X
+          origin: [0, 0, 0]
+      - translate:
+          to:
+            from: right_arm_start
+            offset: [0, '${grip_spacing}', 0]
+
+  right_grip_2:
+    type: transform
+    input: grip_pad
+    transforms:
+      - rotate:
+          angle: 90
+          axis: X
+          origin: [0, 0, 0]
+      - translate:
+          to:
+            from: right_arm_start
+            offset: [0, '${-grip_spacing}', 0]
+
+  # ═══════════════════════════════════════════════════════
+  # STEP 6: UNITE ALL SOLID PARTS
+  # ═══════════════════════════════════════════════════════
+  # This makes it a single, printable assembly!
+
+  structure_assembled:
+    type: boolean
+    operation: union
+    inputs:
+      - mounting_plate
+      - beam_positioned
+      - left_arm_positioned
+      - right_arm_positioned
+      - left_bracket_positioned
+      - right_bracket_positioned
+
+  # ═══════════════════════════════════════════════════════
+  # STEP 7: ADD GRIP TEXTURE (UNION)
+  # ═══════════════════════════════════════════════════════
+
+  structure_with_grips:
+    type: boolean
+    operation: union
+    inputs:
+      - structure_assembled
+      - left_grip_1
+      - left_grip_2
+      - right_grip_1
+      - right_grip_2
+
+  # ═══════════════════════════════════════════════════════
+  # STEP 8: SUBTRACT SCREW HOLES (FINAL STEP!)
+  # ═══════════════════════════════════════════════════════
+
+  awesome_guitar_hanger:
+    type: boolean
+    operation: difference
+    base: structure_with_grips
+    subtract:
+      - left_screw_complete
+      - right_screw_complete
+
+# ═══════════════════════════════════════════════════════
+# EXPORT CONFIGURATION
+# ═══════════════════════════════════════════════════════
+
+export:
+  default_part: awesome_guitar_hanger
+  parts:
+    - name: awesome_guitar_hanger
+      description: Complete guitar hanger assembly - ready to print!
+    - name: structure_assembled
+      description: Structure without grip texture (simpler version)
+    - name: mounting_plate
+      description: Just the mounting plate (for testing)
