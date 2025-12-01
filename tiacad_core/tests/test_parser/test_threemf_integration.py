@@ -16,7 +16,12 @@ from tiacad_core.parser.tiacad_parser import TiaCADParser
 from tiacad_core.exporters.threemf_exporter import ThreeMFExportError
 
 # Skip all tests in this module if lib3mf is not available
-pytest.importorskip("lib3mf", reason="lib3mf not installed (optional dependency for 3MF export)")
+# We need to check if the export function can actually import lib3mf
+try:
+    # This will fail if lib3mf can't be imported inside the exporter
+    from tiacad_core.exporters.threemf_exporter import export_3mf as _test_import
+except ImportError:
+    pytest.skip("lib3mf not installed (optional dependency for 3MF export)", allow_module_level=True)
 
 
 class TestBasicYAMLTo3MF:
