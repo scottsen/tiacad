@@ -75,7 +75,7 @@ jobs:
 
     - name: Upload test outputs on failure
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: visual-regression-outputs
         path: |
@@ -85,7 +85,7 @@ jobs:
 
     - name: Upload reference images (for first run)
       if: steps.check_refs.outputs.references_exist == 'false'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: visual-references
         path: tiacad_core/visual_references/
@@ -109,7 +109,7 @@ jobs:
 
     - name: Upload HTML report
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: visual-regression-report
         path: visual_regression_report.html
