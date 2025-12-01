@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed - Public Release Preparation (2025-12-01)
+
+#### Licensing
+- **LICENSE** - Added Apache 2.0 license (full text)
+  - Copyright: Semantic Infrastructure Lab Contributors
+  - Aligns with SIL ecosystem unified licensing standard
+  - Patent protection for contributors
+  - Clear contributor license terms
+
+- **README.md** - Updated license section
+  - Changed from "TBD" to Apache 2.0
+  - Added copyright attribution
+
+#### Packaging
+- **pyproject.toml** - Added Python packaging configuration (NEW)
+  - Project metadata (name, version, description, authors)
+  - Dependencies from requirements.txt
+  - CLI entry point: `tiacad` command
+  - Development dependencies (pytest, black, mypy)
+  - Tool configurations (black, pytest, coverage)
+  - PyPI classifiers and keywords
+  - Ready for PyPI distribution
+
+#### Version Consistency
+- **tiacad_core/tests/test_visual_regression.py** - Updated version 3.1.0 → 3.1.1
+- **tiacad_core/testing/visual_regression.py** - Updated version 3.1.0 → 3.1.1
+- **tiacad_core/parser/__init__.py** - Updated version 0.1.0-alpha → 3.1.1
+- All versions now consistent at 3.1.1 across entire codebase
+
 ---
 
 ## [3.1.1] - 2025-11-16

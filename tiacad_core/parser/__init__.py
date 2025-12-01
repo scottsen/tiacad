@@ -16,7 +16,7 @@ Status: Phase 1 Implementation - COMPLETE! 🎉
 Test Coverage: 86/86 tests passing (100%)
 """
 
-__version__ = "0.1.0-alpha"
+__version__ = "3.1.1"
 
 # All components implemented!
 from .parameter_resolver import ParameterResolver, ParameterResolutionError

@@ -10,7 +10,7 @@ Tests all example YAML files by:
 Part of TiaCAD v3.1 Phase 2: Visual Regression Testing
 
 Author: TiaCAD Team
-Version: 3.1.0
+Version: 3.1.1
 """
 
 import os
