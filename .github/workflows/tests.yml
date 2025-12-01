@@ -48,7 +48,7 @@ jobs:
 
     - name: Run test suite
       run: |
-        pytest -v --tb=short -x -m "not visual"
+        pytest -v --tb=short -m "not visual"
 
     - name: Run all tests with coverage
       if: matrix.python-version == '3.11'
