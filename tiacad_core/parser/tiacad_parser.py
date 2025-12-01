@@ -191,7 +191,7 @@ class TiaCADDocument:
         """
         try:
             from ..exporters import export_3mf
-            from ..geometry.part_registry import PartRegistry
+            from ..part import PartRegistry
 
             # Determine which parts to export
             if part_name is not None:
