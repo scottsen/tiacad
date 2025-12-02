@@ -18,6 +18,7 @@ from tiacad_core.visualization.renderer import (
 )
 
 
+@pytest.mark.visual
 class TestModelRendererInit:
     """Test renderer initialization"""
 
@@ -67,6 +68,7 @@ class TestModelRendererInit:
                 raise
 
 
+@pytest.mark.visual
 class TestSinglePartRendering:
     """Test rendering individual parts"""
 
@@ -258,6 +260,7 @@ class TestSinglePartRendering:
                 raise
 
 
+@pytest.mark.visual
 class TestAssemblyRendering:
     """Test rendering multi-part assemblies"""
 
@@ -346,6 +349,7 @@ class TestAssemblyRendering:
                 raise
 
 
+@pytest.mark.visual
 class TestConvenienceFunctions:
     """Test convenience wrapper functions"""
 
@@ -411,6 +415,7 @@ class TestConvenienceFunctions:
                 raise
 
 
+@pytest.mark.visual
 class TestErrorHandling:
     """Test error handling"""
 
