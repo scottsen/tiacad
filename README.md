@@ -16,13 +16,13 @@ tags:
 
 # TiaCAD - Declarative Parametric CAD in YAML
 
-**Version:** 3.1.1 (Code Feature Improvements Complete ✅)
-**Status:** v3.1 Phase 2 Complete - Visual Regression Testing + Code Improvements
-**Current:** v3.1.1 features: Backend enhancements, spatial fixes, loft improvements, visual testing
-**Released:** v3.0.0 on Nov 19, 2025 | v3.1.0 Phase 1 on Nov 11, 2025 | v3.1.1 on Nov 16, 2025
+**Version:** 3.1.2 (Production Ready + CI/Docs Complete ✅)
+**Status:** Production - All tests passing, documentation complete, Apache 2.0 licensed
+**Current:** v3.1.2 features: CI fixes, comprehensive documentation, licensing & packaging ready
+**Released:** v3.0.0 on Nov 19, 2025 | v3.1.0 on Nov 11 | v3.1.1 on Nov 16 | v3.1.2 on Dec 2, 2025
 **Breaking Changes:** None in v3.1.x (backward compatible)
 
-> **🎉 v3.1.1 Status: PRODUCTION READY!** All features complete:
+> **🎉 v3.1.2 Status: PRODUCTION READY!** All features complete:
 >
 > **v3.0 Foundation:**
 > - ✅ Unified `SpatialRef` dataclass (position + orientation)

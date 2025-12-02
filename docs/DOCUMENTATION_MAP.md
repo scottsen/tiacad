@@ -164,4 +164,4 @@ See [Archive Summary](archive/ARCHIVE_SUMMARY.md) for:
 ---
 
 **Last Updated:** 2025-12-01
-**TiaCAD Version:** 3.1.1
+**TiaCAD Version:** 3.1.2

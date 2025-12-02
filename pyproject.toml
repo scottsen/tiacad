@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tiacad"
-version = "3.1.1"
+version = "3.1.2"
 description = "Declarative parametric CAD in YAML - Build 3D models with readable, explicit syntax"
 readme = "README.md"
 requires-python = ">=3.10"

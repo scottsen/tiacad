@@ -7,9 +7,69 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed - Public Release Preparation (2025-12-01)
+---
 
-#### Licensing
+## [3.1.2] - 2025-12-02
+
+### Fixed - CI/Testing Infrastructure & Bug Fixes
+
+#### GitHub Actions & CI
+- **test_renderer.py** - Added `@pytest.mark.visual` to all visualization test classes
+  - Properly excludes 63 rendering tests from headless CI
+  - Prevents VTK cleanup crashes in GitHub Actions
+  - Main workflow now runs 1025 tests successfully in ~67 seconds
+  - Visual tests run separately in dedicated workflow
+
+- **.github/workflows/** - Multiple CI workflow improvements
+  - Exclude visual tests from main workflow (`-m "not visual"`)
+  - Updated libgl1 dependencies for headless rendering
+  - Simplified test workflow configuration
+  - All workflows now passing ✅
+
+#### Bug Fixes
+- **tiacad_core/parser/__init__.py** - Fixed PartRegistry import path in `export_3mf()`
+  - Corrected from incorrect import location
+  - 3MF export now works correctly
+
+- **tiacad_core/tests/test_visualization/test_renderer.py** - Improved 3MF test robustness
+  - Added lib3mf availability detection
+  - Skip 3MF tests gracefully if lib3mf not installed
+  - Clearer test output for missing dependencies
+
+- **tiacad_core/tests/test_spatial_resolver.py** - Fixed mock part positioning
+  - Set `current_position` on mock parts in tests
+  - Enables accurate origin tracking tests
+  - Aligns with spatial resolver improvements
+
+### Added - Documentation & Project Infrastructure
+
+#### Documentation Improvements
+- **docs/DOCUMENTATION_MAP.md** - Complete navigation guide (167 lines)
+  - Task-oriented organization ("I want to...")
+  - Clear paths for learning, contributing, understanding architecture
+  - Quick reference for all 28 documentation files
+  - Documentation statistics and FAQ
+
+- **docs/archive/ARCHIVE_SUMMARY.md** - Archive navigation (100 lines)
+  - Context for historical documents
+  - Pointers to current documentation
+  - Explanation of archive purpose
+
+- **docs/CGA_V5_FUTURE_VISION.md** - Renamed from `CGA_V5_ARCHITECTURE_SPEC.md`
+  - Added prominent "FUTURE VISION" disclaimer
+  - Clarifies this is aspirational v5.0+ content
+  - Prevents confusion with current v3.1 architecture
+
+- **docs/archive/** - Added archive disclaimers to 5 historical documents
+  - Clear "ARCHIVED DOCUMENT" warnings
+  - Links to current documentation
+  - Preserves historical context without confusion
+
+- **README.md, docs/user/TUTORIAL.md** - Updated test counts
+  - Corrected to current 1025 tests passing
+  - Updated last modified dates
+
+#### Licensing & Packaging
 - **LICENSE** - Added Apache 2.0 license (full text)
   - Copyright: Semantic Infrastructure Lab Contributors
   - Aligns with SIL ecosystem unified licensing standard
@@ -20,8 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Changed from "TBD" to Apache 2.0
   - Added copyright attribution
 
-#### Packaging
-- **pyproject.toml** - Added Python packaging configuration (NEW)
+- **pyproject.toml** - Added Python packaging configuration
   - Project metadata (name, version, description, authors)
   - Dependencies from requirements.txt
   - CLI entry point: `tiacad` command
@@ -30,11 +89,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - PyPI classifiers and keywords
   - Ready for PyPI distribution
 
-#### Version Consistency
-- **tiacad_core/tests/test_visual_regression.py** - Updated version 3.1.0 → 3.1.1
-- **tiacad_core/testing/visual_regression.py** - Updated version 3.1.0 → 3.1.1
-- **tiacad_core/parser/__init__.py** - Updated version 0.1.0-alpha → 3.1.1
-- All versions now consistent at 3.1.1 across entire codebase
+### Changed - Version Consistency
+- **tiacad_core/__init__.py** - Version 3.1.1 → 3.1.2
+- **pyproject.toml** - Version 3.1.1 → 3.1.2
+- All versions consistent across codebase
 
 ---
 
