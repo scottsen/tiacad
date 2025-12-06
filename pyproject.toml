@@ -48,10 +48,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/scottsen/tiacad"
-Documentation = "https://github.com/scottsen/tiacad"
-Repository = "https://github.com/scottsen/tiacad"
-"Bug Tracker" = "https://github.com/scottsen/tiacad/issues"
+Homepage = "https://github.com/Semantic-Infrastructure-Lab/tiacad"
+Documentation = "https://github.com/Semantic-Infrastructure-Lab/tiacad"
+Repository = "https://github.com/Semantic-Infrastructure-Lab/tiacad"
+"Bug Tracker" = "https://github.com/Semantic-Infrastructure-Lab/tiacad/issues"
 
 [project.scripts]
 tiacad = "tiacad_core.cli:main"
