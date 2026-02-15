@@ -718,8 +718,7 @@ operations:
     pattern: linear
     input: bolt_hole
     count: 5                 # Number of copies
-    spacing: 20              # Distance between copies
-    direction: X             # X, Y, Z, or [x,y,z]
+    spacing: [20, 0, 0]      # [dx, dy, dz] - X direction spacing
 ```
 
 **2D Linear Pattern:**

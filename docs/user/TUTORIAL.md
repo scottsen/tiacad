@@ -419,8 +419,7 @@ center: [0, 0, 0]       # Circle center
 type: pattern
 pattern: linear
 count: 5                # How many
-spacing: 20             # Distance between
-direction: X            # Which direction
+spacing: [20, 0, 0]     # [dx, dy, dz] spacing vector
 ```
 
 **Grid Pattern** (2D array):
