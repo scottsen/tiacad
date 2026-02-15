@@ -168,8 +168,7 @@ operations:
     pattern: linear
     input: cable_hole
     count: 3
-    spacing: '${cable_hole_spacing}'
-    direction: X
+    spacing: ['${cable_hole_spacing}', 0, 0]
 
   # Position cable holes on back wall
   cable_hole_0_positioned:
