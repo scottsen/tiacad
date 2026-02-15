@@ -379,13 +379,19 @@ class HullBuilder:
 
             try:
                 # Import STL as CadQuery solid
-                result = cq.importers.importShape(
-                    cq.exporters.ExportTypes.STL,
-                    tmp_path
-                )
-
-                # Wrap in Workplane
-                return cq.Workplane("XY").newObject([result])
+                try:
+                    result = cq.importers.importShape(
+                        cq.exporters.ExportTypes.STL,
+                        tmp_path
+                    )
+                    # Wrap in Workplane
+                    return cq.Workplane("XY").newObject([result])
+                except RuntimeError as stl_error:
+                    # STL import not supported in this CadQuery version
+                    # Fall back to simple approach
+                    if "Unsupported import type" in str(stl_error):
+                        return self._build_solid_from_hull_simple(points, hull)
+                    raise
 
             finally:
                 # Clean up temporary file
@@ -395,6 +401,9 @@ class HullBuilder:
         except ImportError:
             # Trimesh not available, try simpler approach with CadQuery primitives
             return self._build_solid_from_hull_simple(points, hull)
+        except HullBuilderError:
+            # Re-raise our own errors
+            raise
         except Exception as e:
             raise HullBuilderError(
                 f"Failed to build solid from convex hull: {str(e)}"
