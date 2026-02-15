@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed - 2026-02-15
+
+#### Examples API Compatibility (21 examples fixed, 50% → 95% pass rate)
+
+**Auto-references examples** (4 fixed):
+- Updated export format from deprecated list syntax to current dict syntax
+- Examples: auto_references_{box_stack, cylinder_assembly, rotation, with_offsets}.yaml
+- Now showcase auto-generated anchors feature correctly
+
+**LEGO brick examples** (2 fixed):
+- Updated cone primitive: `radius_bottom`/`radius_top` → `radius1`/`radius2`
+- Updated pattern spacing: scalar + `direction: X` → vector `spacing: [dx, dy, dz]`
+- Examples: lego_brick_2x1.yaml, lego_brick_3x1.yaml
+- Created fix_pattern_api.py tool for automated migration
+
+**Week5 examples** (2 fixed):
+- Updated translate format: removed deprecated `offset:` wrapper for direct offsets
+- Examples: week5_assembly.yaml, week5_frame_based_rotation.yaml
+- Note: `offset:` still valid when used with `to:` parameter
+
+**Multi-material example** (1 fixed):
+- Updated pattern spacing API (same as LEGO bricks)
+- Example: multi_material_enclosure.yaml
+
+**Build artifacts**:
+- Added *.3mf to .gitignore (generated output files)
+
+**Result**: Examples now at 95.7% pass rate (44/46), up from 50% (23/46)
+
+---
+
 ### Infrastructure - 2026-02-15
 
 #### Development Environment Verification
