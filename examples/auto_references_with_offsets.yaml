@@ -69,8 +69,10 @@ parts:
 
 # Export the assembly
 export:
-  - filename: auto_references_with_offsets.step
-    parts: [platform, post_1, post_2, post_3, post_4, top_platform]
+  default_part: top_platform
+  formats:
+    - step
+    - stl
 
 # Result: A platform with four corner posts and a top platform
 # - Offsets allow precise positioning relative to auto-generated anchors

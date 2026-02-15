@@ -71,8 +71,10 @@ parts:
 
 # Export the assembly
 export:
-  - filename: auto_references_rotation.step
-    parts: [base, arm_x, arm_y, arm_z, arm_diagonal]
+  default_part: arm_diagonal
+  formats:
+    - step
+    - stl
 
 # Result: A 3D cross with arms extending in different directions
 # - Auto-axes make rotation intuitive without manual axis calculation

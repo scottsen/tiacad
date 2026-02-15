@@ -46,8 +46,10 @@ parts:
 
 # Export the assembly
 export:
-  - filename: auto_references_cylinder_assembly.step
-    parts: [shaft, top_cap, bottom_cap, sphere_top]
+  default_part: sphere_top
+  formats:
+    - step
+    - stl
 
 # Result: A cylinder with caps on both ends and a sphere on top
 # - All parts perfectly aligned without manual coordinate calculation

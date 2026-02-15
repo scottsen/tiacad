@@ -38,8 +38,10 @@ parts:
 
 # Export the stacked boxes
 export:
-  - filename: auto_references_box_stack.step
-    parts: [base, middle, top]
+  default_part: top
+  formats:
+    - step
+    - stl
 
 # Result: Three boxes perfectly stacked without manual coordinate calculation
 # - base: centered at origin
