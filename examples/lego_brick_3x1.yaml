@@ -104,8 +104,8 @@ parts:
   # Chamfer for stud top (cone shape)
   stud_chamfer:
     primitive: cone
-    radius_bottom: '${stud_radius}'
-    radius_top: '${stud_chamfer_radius}'
+    radius1: '${stud_radius}'
+    radius2: '${stud_chamfer_radius}'
     height: '${stud_chamfer_height}'
     origin: center
 
@@ -153,8 +153,7 @@ operations:
     pattern: linear
     input: stud
     count: '${stud_count}'
-    spacing: '${stud_pitch}'
-    direction: X
+    spacing: ['${stud_pitch}', 0, 0]
 
   # Position first stud
   stud_0_positioned:
@@ -192,8 +191,7 @@ operations:
     pattern: linear
     input: stud_chamfer
     count: '${stud_count}'
-    spacing: '${stud_pitch}'
-    direction: X
+    spacing: ['${stud_pitch}', 0, 0]
 
   # Position first chamfer
   chamfer_0_positioned:
@@ -253,16 +251,14 @@ operations:
     pattern: linear
     input: support_post_outer
     count: '${stud_count}'
-    spacing: '${stud_pitch}'
-    direction: X
+    spacing: ['${stud_pitch}', 0, 0]
 
   post_inner_array:
     type: pattern
     pattern: linear
     input: support_post_inner
     count: '${stud_count}'
-    spacing: '${stud_pitch}'
-    direction: X
+    spacing: ['${stud_pitch}', 0, 0]
 
   # Position first post
   post_outer_0_positioned:
